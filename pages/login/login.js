@@ -25,7 +25,7 @@ Page({
       return;
     }
     wx.request({
-      url: 'http://sxz.zykj.com:8025/api/TokenAuth/Authenticate',
+      url: 'http://172.16.168.161:8025/api/TokenAuth/Authenticate',
       method: 'post',
       data: {
         userName: value.userName,

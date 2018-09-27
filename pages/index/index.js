@@ -1,35 +1,35 @@
 // pages/index/index.js
-import { isEmpty } from '../../utils/util.js';
+import { isEmpty, loginInfo } from '../../utils/util.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    accessInfo: null
+    accessInfo: loginInfo()
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const accessInfo = wx.getStorageSync('accessInfo');
-    const userInfo = wx.getStorageSync('userInfo');
-    console.log('userInfo', userInfo);
-    if (userInfo === null || isEmpty(userInfo)) {
-      wx.navigateTo({
-        url: '/pages/login/login'
-      })
-    } else {
-      wx.navigateTo({
-        url: '/pages/userInfo/userInfo',
-      })
-    }
-    console.log('accessInfo1', accessInfo);
-    this.setData({
-      accessInfo: accessInfo,
-      userInfo: userInfo
-    });
+    // const accessInfo = wx.getStorageSync('accessInfo');
+    // const userInfo = wx.getStorageSync('userInfo');
+    // console.log('userInfo', userInfo);
+    // if (userInfo === null || isEmpty(userInfo)) {
+    //   wx.navigateTo({
+    //     url: '/pages/login/login'
+    //   })
+    // } else {
+    //   wx.navigateTo({
+    //     url: '/pages/userInfo/userInfo',
+    //   })
+    // }
+    // console.log('accessInfo1', accessInfo);
+    // this.setData({
+    //   accessInfo: accessInfo,
+    //   userInfo: userInfo
+    // });
 
   },
 

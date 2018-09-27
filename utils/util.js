@@ -81,8 +81,16 @@ const getWeekArray = (start, end) => {
   }
   return weekArray;
 }
-
+const loginInfo = () => {
+  const accessInfo = wx.getStorageSync('accessInfo');
+  if (accessInfo && accessInfo.accessToken) {
+    return accessInfo.accessToken;
+  }else {
+    return null;
+  }
+}
 module.exports = {
   formatTime: formatTime,
-  isEmpty: isEmpty
+  isEmpty: isEmpty,
+  loginInfo: loginInfo
 }

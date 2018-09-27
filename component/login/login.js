@@ -1,4 +1,5 @@
 // component/login/login.js
+import { login } from '../../service/user.js'
 Component({
   /**
    * 组件的属性列表
@@ -36,27 +37,18 @@ Component({
       wx.showLoading({
         title: '正在登陆',
       })
-      wx.request({
-        url: 'http://sxz.zykj.com:8025/api/TokenAuth/Authenticate',
-        method: 'post',
-        data: {
-          userName: value.userName,
-          password: value.password,
-          role: 9
-        },
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
-        success(res) {
-          wx.hideLoading();
-          if (res.data.success) {
-            wx.setStorageSync('accessInfo', res.data.result);
-            wx.navigateTo({
-              url: '/pages/userInfo/userInfo',
-            })
-          }
-        }
-      })
+      login(value)
+        .then((res, rej) => {
+          wx.navigateTo({
+            url: '/pages/userInfo/userInfo',
+          });
+        })
+        .catch(e => {
+          wx.showToast({
+            title: '登陆失败',
+          })
+        })
+      
     },
 
   }

@@ -17,7 +17,7 @@ Page({
   initCourseList: (self) => {
     const accessInfo = wx.getStorageSync("accessInfo");
     wx.request({
-      url: 'http://sxz.zykj.com:8025/api/services/app/TeacherUser/GetMyCoursesAsync',
+      url: 'http://172.16.168.161:8025/api/services/app/TeacherUser/GetMyCoursesAsync',
       method: 'get',
       data: {},
       header: {
@@ -46,7 +46,7 @@ Page({
     const self = this;
     const accessInfo = wx.getStorageSync("accessInfo");
     wx.request({
-      url: 'http://sxz.zykj.com:8025/api/services/app/User/GetInfoAsync',
+      url: 'http://172.16.168.161:8025/api/services/app/User/GetInfoAsync',
       method: 'get',
       data: {},
       header: {
