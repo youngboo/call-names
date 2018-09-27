@@ -1,0 +1,30 @@
+<view class='login-container'>
+  <!-- <login success="{{loginSuccess}}"></login> -->
+  <!-- <image class='bg_mountain' mode="aspectFill" src='../../resources/image/bg_mountain.png'></image> -->
+  <view class='login-box'>
+    <view class='login-title'>
+      <text class='title-text'>登录</text>
+    </view>
+    <view>
+      <form bindsubmit="formSubmit">
+        <view class='form-container'>
+          <view class='form-item'>
+            <image class='input-icon' src='../../resources/image/icon_school.png'></image>
+            <input class='form-input' name="school" placeholder="请输入学校名" />
+          </view>
+          <view class='form-item'>
+            <image class='input-icon' src='../../resources/image/icon_user.png'></image>
+            <input  class='form-input' name="userName" placeholder="请输入账号" />
+          </view>
+          <view class='form-item'>
+            <image class='input-icon' src='../../resources/image/icon_lock.png'></image>
+            <input  class='form-input' name="password" type='password' placeholder="请输入密码" />
+          </view>
+          <view class='form-item submit-button'>
+            <button class='button-text' formType="submit">登录</button>
+          </view>
+        </view>
+      </form>
+    </view>
+  </view>
+</view>

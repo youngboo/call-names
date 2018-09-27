@@ -1,0 +1,23 @@
+<!--pages/userInfo/userInfo.wxml-->
+<view class='center-container'>
+  <view class='list-box'>
+    <view class='title-bar'>
+      <view clas='user-info'>
+        <view class='image-box'>
+          <image class='user-image' src='{{userInfo.photo}}'></image>
+        </view>
+        <text class='user-name'>{{userInfo.realName}}</text>
+      </view>
+      <view class='bar-item'>
+        <icon></icon>
+        <text>注销</text>
+      </view>
+    </view>
+    <view class='divider-box'>
+      <view class='divider'/>
+    </view>
+    <view class='list-container'>
+      <course-list dataSource="{{courseList}}" bind:tapEvent='onTapCourse'></course-list>
+    </view>
+  </view>
+</view>

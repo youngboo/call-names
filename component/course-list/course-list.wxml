@@ -1,0 +1,23 @@
+<view class="listview-container">
+  <block wx:for="{{dataSource}}" wx:key="">
+    <view class="playlog-item">
+      <view class="dotline">
+        <!-- 竖线 -->
+        <view class="line"></view>
+        <!-- 圆点 -->
+        <view class="dot"></view>
+        <!-- 时间戳 -->
+      </view>
+      <view class="content">
+        <text class="course">{{item.time}}</text>
+        <block wx:for="{{item.courseList}}" wx:for-item="info" wx:key='*this'>
+          <view class='course-item' bindtap='handleTapCourse' id='{{info.id}}' data-hi='{{info.id}}'>
+            <text>{{info.name}}</text>
+            <text>{{info.content}}</text>
+            <text>{{info.state}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </block>
+</view>

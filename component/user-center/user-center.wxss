@@ -1,0 +1,17 @@
+/* component/user-center/user-center.wxss */
+.list-box {
+  display:flex;
+  height:90vh;
+  width:100vh;
+  flex-direction:column;
+}
+.title-bar {
+  height:20vh;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:no-wrap;
+}
+  .user-image {
+    height:48rpx;
+    width:48rpx;
+  }

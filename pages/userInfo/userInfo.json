@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "用户信息",
+  "usingComponents": {
+    "course-list": "/component/course-list/course-list"
+  }
+}
