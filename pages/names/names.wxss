@@ -1,1 +1,28 @@
 /* pages/names/names.wxss */
+.student-item {
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.yes {
+  border: 1px solid green;
+}
+.no {
+  border: 1px solid red;
+
+}
+.item-image {
+  width:24px;
+  height: 24px;
+}
+.submit-button {
+  position:fixed;
+  left:0px;
+  right:0px;
+  bottom:1em;
+  width:8em;
+  height:2.5em;
+  margin-left:auto;
+  margin-right:auto;
+}

@@ -1,0 +1,6 @@
+<!--component/week-selector/week-selector.wxml-->
+<view class='week-selector'>
+  <button bindtap='lastWeek'>上一周</button>
+  <view class='title-time'><text>{{current.weekInfo.title}}</text></view>
+  <button bindtap='nextWeek'>下一周</button>
+</view>

@@ -57,6 +57,26 @@
     /* border-bottom: 1px solid #ddd; */
     margin: 3px 0;
 }
+.course-item {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:80vw;
+  border:1px solid rgba(143, 134, 134, 0.788);
+  border-radius:10px;
+  height:3em;
+  margin-bottom:0.5em;
+  font-size: 11pt;
+}
+  .info-box {
+    margin-left: 0.5em;
+    display:flex;
+    flex-direction:column;
+  }
+  .state-box {
+    margin-right: 0.5em;
+  }
+
 
 /*章节部分*/
 .playlog-item .content .chapter {

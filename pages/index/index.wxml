@@ -1,8 +1,8 @@
 <!--pages/index/index.wxml-->
-<view wx:if="{{assessInfo != null}}">
+<!-- <block wx:if="{{accessInfo}}">
   <user-center userInfo="{{userInfo}}"></user-center>
-</view>
-<view wx:else>
+</block>
+<block wx:else>
   <login></login>
-</view>
+</block> -->
 

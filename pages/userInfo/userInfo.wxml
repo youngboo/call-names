@@ -8,16 +8,24 @@
         </view>
         <text class='user-name'>{{userInfo.realName}}</text>
       </view>
-      <view class='bar-item'>
-        <icon></icon>
+      <view class='bar-item' bindtap='logout'>
+        <image class='close-icon' src='../../resources/image/icon_close.png'></image>
         <text>注销</text>
       </view>
     </view>
     <view class='divider-box'>
       <view class='divider'/>
     </view>
+    <view>
+      <week-selector bind:changeWeek='onChangeWeek' current="{{currentWeek}}"></week-selector>
+    </view>
     <view class='list-container'>
-      <course-list dataSource="{{courseList}}" bind:tapEvent='onTapCourse'></course-list>
+      <view wx:if='{{courseList}}'>
+        <course-list dataSource="{{courseList}}" bind:tapEvent='onTapCourse'></course-list>
+      </view>
+      <view wx:else>
+        <image src='../../resources/image/pic_null.png'></image>
+      </view>
     </view>
   </view>
 </view>

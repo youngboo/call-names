@@ -1,7 +1,7 @@
 import { API } from '../config/ApiConfig.js'
 import { isEmpty } from '../utils/util.js'
-
-export const login = (data) => {
+const accessInfo = wx.getStorageSync("accessInfo");
+const login = (data) => {
     return new Promise((resolve, reject) => {
       wx.request({
         url: API.login,
@@ -28,11 +28,11 @@ export const login = (data) => {
   /**
    * 从缓存或网络异步获取用户信息
    */
-  const getUserInfo = () => {
+const getUserInfo = () => {
     return new Promise((resolve, reject) => {
       const userInfo = wx.getStorageSync('userInfo');
-      console.log('isString', typeof userInfo === 'string');
-      if (null !== userInfo) {
+      console.log(userInfo);
+      if (null !== userInfo && !isEmpty(userInfo)) {
         resolve(userInfo);
       }else {
         wx.request({
@@ -48,8 +48,13 @@ export const login = (data) => {
             let photo = res.data.result.photo;
             res.data.result.photo = photo + '?x-oss-process=image/resize,l_32';
             wx.setStorageSync('userInfo', res.data.result);
+            resolve(res.data.result);
           }
         })
       }
     });
+  }
+module.exports = {
+    login: login,
+    getUserInfo: getUserInfo
   }

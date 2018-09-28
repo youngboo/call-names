@@ -12,14 +12,17 @@ Component({
    */
   data: {
     userInfo: wx.getStorageSync("userInfo"),
-    userName: ''
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    getUserInfo: () => {
-    }
+    onTapCourse: (e, detail) => {
+      console.log("父组件接受了事件", e);
+      wx.navigateTo({
+        url: `/pages/names/names?id=${e.detail.id}`,
+      })
+    },
   }
 })

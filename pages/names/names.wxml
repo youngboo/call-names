@@ -1,2 +1,19 @@
 <!--pages/names/names.wxml-->
-<text>pages/names/names.wxml</text>
+<view>
+  <block wx:for='{{studentsList}}' wx:for-item='item' wx:key='*this'>
+    <view class='student-item {{item.checked ? "yes" : "no"}}' bindtap='tapName' id='{{item.id}}' data-index='{{index}}'>
+
+      <view>
+        <text>{{index + 1}}</text>
+        <text>{{item.fullName}}</text>
+      </view>
+      <view>
+        <text>{{item.classInfo}}</text>
+      </view>
+      <view>
+        <image class='item-image' src='{{item.checked ? "../../resources/image/icon_right.png" : "../../resources/image/icon_worry.png"}}'></image>
+      </view>
+    </view>
+  </block>
+  <button class='submit-button' bindtap='submitNames'>提交点名结果</button>
+</view>

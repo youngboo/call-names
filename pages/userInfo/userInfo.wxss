@@ -43,6 +43,18 @@
     padding-right:0.5em;
     border-radius: 100%;
   }
+  .bar-item {
+    background: #5997FA;
+    color:#fff;
+    border-radius: 5px;
+    font-size: 9pt;
+    height: 1.5em;
+    width: 4em;
+  }
+  .close-icon {
+    width: 1em;
+    height: 1em;
+  }
 .divider-box {
   text-align: center;
   display:flex;

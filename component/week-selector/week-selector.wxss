@@ -1,0 +1,14 @@
+/* component/week-selector/week-selector.wxss */
+.week-selector {
+  display: flex;
+  font-size: 9pt;
+  margin-top: 1em;
+}
+ button {
+   font-size: 9pt;
+ }
+  .title-time {
+    align-items:center;
+    justify-content:center;
+    display:flex;
+  }
