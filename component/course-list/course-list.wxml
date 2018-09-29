@@ -18,6 +18,9 @@
             </view>
             <view class='state-box {{info.state.color}}'>
               <text>{{info.state.text}}</text>
+              <view class='attend-text' wx:if='{{info.attend}}'>
+                <text>{{info.attend.creationTime}}</text>
+              </view>
             </view>
           </view>
         </block>

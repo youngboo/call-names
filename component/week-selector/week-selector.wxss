@@ -1,9 +1,24 @@
 /* component/week-selector/week-selector.wxss */
 .week-selector {
   display: flex;
-  font-size: 9pt;
+  font-size: 9px;
   margin-top: 1em;
+  align-items:center;
+  justify-content:space-around;
 }
+  .back-img {
+    width: 16px;
+    height: 16px;
+  }
+  .week-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F6FAFF;
+    border-radius: 3px;
+    text-align: center;
+  }
+
  button {
    font-size: 9pt;
  }

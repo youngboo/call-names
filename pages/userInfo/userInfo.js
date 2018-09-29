@@ -22,19 +22,25 @@ Page({
     if(this.data.currentWeek === null) {
       this.initWeeks();
     }
+    const currentWeek = this.data.currentWeek;
     if (this.data.userInfo === null) {
       getUserInfo()
         .then((res) => {
           this.setData({
             userInfo: res
           })
+          this.getCourseListByTime({
+            startTime: currentWeek.weekInfo.start,
+            endTime: currentWeek.weekInfo.end
+          });
         })
+    }else {
+      this.getCourseListByTime({
+        startTime: currentWeek.weekInfo.start,
+        endTime: currentWeek.weekInfo.end
+      });
     }
-    const currentWeek = this.data.currentWeek;
-    this.getCourseListByTime({
-      startTime: currentWeek.weekInfo.start,
-      endTime: currentWeek.weekInfo.end
-    });
+    
   },
   initWeeks: function() {
     const weeks = getWeeks();

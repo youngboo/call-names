@@ -2,7 +2,7 @@
 <view wx:if='{{!showNames}}' class='center-container'>
   <view class='list-box'>
     <view class='title-bar'>
-      <view clas='user-info'>
+      <view class='user-info'>
         <view class='image-box'>
           <image class='user-image' src='{{userInfo.photo}}'></image>
         </view>
@@ -23,7 +23,7 @@
       <view wx:if='{{courseList}}'>
         <course-list dataSource="{{courseList}}" bind:tapEvent='onTapCourse'></course-list>
       </view>
-      <view wx:else>
+      <view wx:else class='no-container'>
         <image src='../../resources/image/pic_null.png'></image>
       </view>
     </view>

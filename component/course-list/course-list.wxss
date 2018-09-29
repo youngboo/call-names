@@ -72,10 +72,21 @@
     margin-left: 0.5em;
     display:flex;
     flex-direction:column;
+    flex: 0 1 60%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 14px;
   }
   .state-box {
     margin-right: 0.5em;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
   }
+    .attend-text {
+      font-size: 9px;
+    }
 
 
 /*章节部分*/
