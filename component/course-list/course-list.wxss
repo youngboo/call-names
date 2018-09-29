@@ -31,7 +31,7 @@
 .playlog-item .dotline .dot {
     width: 11px;
     height: 11px; 
-    background: #30ac63;
+    background: #5997FA;
     position: absolute; 
     top: 10px; 
     left: 10px; 
@@ -62,8 +62,8 @@
   justify-content:space-between;
   align-items:center;
   width:80vw;
-  border:1px solid rgba(143, 134, 134, 0.788);
-  border-radius:10px;
+  border:0.5pt solid #E4E7F0;
+  border-radius:4pt;
   height:3em;
   margin-bottom:0.5em;
   font-size: 11pt;
@@ -92,4 +92,13 @@
     font-size: 28rpx;
     line-height: 56rpx;
     color: #999;
+}
+.text-third {
+  color: #999999;
+}
+.text-red {
+  color: #FF7D7D;
+}
+.text-blue {
+  color: #5997FA;
 }

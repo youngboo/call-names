@@ -1,0 +1,21 @@
+view {
+  font-family:PingFangSC-Regular, "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 14px;
+  color: #333333;
+}
+.text-main {
+  color: #333333;
+}
+.text-second {
+  color: #666666;
+  letter-spacing: -0.39px;
+}
+.text-third {
+  color: #999999;
+}
+.text-red {
+  color: #FF7D7D;
+}
+.text-blue {
+  color: #5997FA;
+}

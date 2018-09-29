@@ -64,9 +64,13 @@ Component({
    */
   methods: {
     handleTapCourse: function (e) {
-      console.log('点击了', e);
+      console.log('点击了课程列表', e);
       var myEventDetail = {
-        id: e.currentTarget.id
+        id: e.currentTarget.id,
+        info: {
+          courseId: e.currentTarget.id,
+          ...e.currentTarget.dataset
+        }
       } // detail对象，提供给事件监听函数
       this.triggerEvent('tapEvent', myEventDetail);
     }

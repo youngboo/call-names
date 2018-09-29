@@ -1,7 +1,13 @@
-<!--pages/names/names.wxml-->
 <view class='names-title'>
-  <text>{{name}}</text>
-  <text>{{checkedLength}}/{{studentsList.length}}</text>
+  <view class='title-top'>
+    <view bindtap='backIndex'><text>返回</text></view>
+    <text>{{courseInfo.name}}</text>
+    <text>{{attendCount}}/{{studentsList.length}}</text>
+  </view>
+  <view class='warn-message' wx:if='{{errorMessage}}'>
+    <icon class='warn-icon' type="warn" size="16" color="#FF5858"/>
+    <text>{{errorMessage}}</text>
+  </view>
 </view>
 <view class='name-container'>
   <block wx:for='{{studentsList}}' wx:for-item='item' wx:key='*this'>

@@ -2,6 +2,7 @@
   "navigationBarTitleText": "用户信息",
   "usingComponents": {
     "course-list": "/component/course-list/course-list",
-    "week-selector": "/component/week-selector/week-selector"
+    "week-selector": "/component/week-selector/week-selector",
+    "names": "/component/names/names"
   }
 }

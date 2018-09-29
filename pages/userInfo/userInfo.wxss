@@ -50,6 +50,10 @@
     font-size: 9pt;
     height: 1.5em;
     width: 4em;
+    display:flex;
+    flex-wrap:no-wrap;
+    justify-content:center;
+    align-items:center;
   }
   .close-icon {
     width: 1em;

@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    courseId: null
+    courseId: null,
+    name: null,
+    checkedLength: 0
   },
 
   /**
@@ -26,13 +28,15 @@ Page({
             return {
               id: item.id,
               fullName: item.user.fullName,
-              classInfo: item.class.enterSchoolYear + '届',
+              classInfo: item.class.enterSchoolYear + '届 '+item.class.name,
               checked: true
             }
           })
           this.setData({
             studentsList: list,
-            courseId: options.id
+            courseId: options.id,
+            name: options.courseName,
+            checkedLength: list.length
           })
         }
       })
@@ -40,10 +44,14 @@ Page({
   tapName: function(e) {
     console.log('点名了', e);
     const index = e.currentTarget.dataset.index;
-    let checked = this.data.studentsList[index].checked 
+    let checked = this.data.studentsList[index].checked;
     this.data.studentsList[index].checked = !checked;
+    const checkedList = this.data.studentsList.filter((item) => {
+      return item.checked;
+    })
     this.setData({
-      studentsList: this.data.studentsList
+      studentsList: this.data.studentsList,
+      checkedLength: checkedList.length
     })
   },
   submitNames: function(e) {
@@ -65,8 +73,17 @@ Page({
     //console.log(idList);
     updateAttendance({
       courseId: this.data.courseId,
-      studentIdList: idList
+      studentIdList: idList,
+      courseDate: new Date()
     })
+      .then((res) => {
+        wx.showToast({
+          title: '提交成功',
+        })
+        wx.redirectTo({
+          url: '/pages/userInfo/userInfo',
+        })
+      })
   },
 
   /**

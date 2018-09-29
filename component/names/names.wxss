@@ -1,14 +1,16 @@
+/* component/names/names.wxss */
 /* pages/names/names.wxss */
 .names-title {
   position: fixed;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
+  align-items: left;
+  justify-content: center;
+  flex-direction: column;
   width: 100%;
   top: 0px;
   left:0px;
   right:0px;
-  height:1em;
+  height:auto;
   margin-left:auto;
   margin-right:auto;
   background: #FFFFFF;
@@ -17,6 +19,21 @@
   color: #333333;
   letter-spacing: 0.11px;
 }
+  .title-top{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width:100%;
+  }
+  .warn-message {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    margin-left: 10vw;
+  }
+    .warn-icon {
+      margin-right:7px;
+    }
 .name-container {
   margin-top:1.5em;
 }

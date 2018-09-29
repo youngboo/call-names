@@ -1,5 +1,5 @@
 <!--pages/userInfo/userInfo.wxml-->
-<view class='center-container'>
+<view wx:if='{{!showNames}}' class='center-container'>
   <view class='list-box'>
     <view class='title-bar'>
       <view clas='user-info'>
@@ -29,3 +29,4 @@
     </view>
   </view>
 </view>
+<names wx:if='{{showNames}}' attendCount='{{attendCount}}' studentsList='{{studentsList}}' bind:backEvent='onBackIndex' courseInfo='{{courseInfo}}'></names>

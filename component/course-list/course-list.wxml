@@ -11,13 +11,13 @@
       <view class="content">
         <text class="course">{{item.time}}</text>
         <block wx:for="{{item.courseList}}" wx:for-item="info" wx:key='*this'>
-          <view class='course-item' bindtap='handleTapCourse' id='{{info.id}}' data-hi='{{info.id}}'>
+          <view class='course-item' bindtap='handleTapCourse' id='{{info.id}}' data-attend='{{info.attend}}' data-date='{{item.date}}' data-name='{{info.name}}'>
             <view class='info-box'>
               <text>{{info.name}}</text>
               <text>{{info.content}}</text>
             </view>
-            <view class='state-box'>
-              <text>{{info.state}}</text>
+            <view class='state-box {{info.state.color}}'>
+              <text>{{info.state.text}}</text>
             </view>
           </view>
         </block>

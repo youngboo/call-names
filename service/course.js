@@ -30,7 +30,7 @@ const getStudentsList = (data) => {
         'Authorization': 'Bearer ' + accessInfo.accessToken
       },
       success: (res) => {
-        resolve(res);
+        resolve(res.data.result);
       }
     })
   });
@@ -47,6 +47,11 @@ const updateAttendance = (data) => {
       },
       success: (res) => {
         resolve(res);
+        // if (!res.success) {
+        //   reject(res.error.message);
+        // }else {
+          
+        // }
       }
     })
   });

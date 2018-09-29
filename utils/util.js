@@ -188,6 +188,29 @@ const loginInfo = () => {
     return null;
   }
 }
+const groupByValue = (list, value) => {
+  let dest = [];
+  let map = {};
+  list.forEach((item) => {
+    let id = item[value];
+    if (!map[id]) {
+      dest.push({
+        id: id,
+        valueList: [item]
+      });
+      map[id] = item;
+    } else {
+      for (let i = 0; i < dest.length; i++) {
+        let obj = dest[i];
+        if (id === obj.id) {
+          obj.valueList.push(item);
+          break;
+        }
+      }
+    }
+  });
+  return dest;
+}
 
 module.exports = {
   formatTime: formatTime,
@@ -195,5 +218,6 @@ module.exports = {
   loginInfo: loginInfo,
   getWeeks: getWeeks,
   patternDate: patternDate,
+  groupByValue: groupByValue,
   getValueListFromArray, getValueListFromArray
 }
