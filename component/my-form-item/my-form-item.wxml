@@ -1,0 +1,6 @@
+<!--component/my-form-item/my-form-item.wxml-->
+<view class='form-item {{schoolRequire ? form-warn : ""}}'>
+  <image class='input-icon' src='../../resources/image/icon_school.png'></image>
+  <input class='form-input' confirm-type='next' bindblur='validateRequire' id='school' type='text' name="school" placeholder="请输入学校名" />
+  <icon type='warn' color='#E64340' size='23' wx:if='{{schoolRequire}}'></icon>
+</view>

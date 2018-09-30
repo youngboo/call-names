@@ -1,3 +1,9 @@
+<view class='names-title' wx:if='{{showTopTips}}'>
+  <view class='warn-message'>
+    <icon class='warn-icon' type="warn" size="16" color="#FF5858"/>
+    <text>{{errorMessage}}</text>
+  </view>
+</view>
 <view class='login-container'>
   <!-- <login success="{{loginSuccess}}"></login> -->
   <!-- <image class='bg_mountain' mode="aspectFill" src='../../resources/image/bg_mountain.png'></image> -->
@@ -8,17 +14,20 @@
     <view class='form-box'>
       <form bindsubmit="formSubmit">
         <view class='form-container'>
-          <view class='form-item {{schoolRequire}}'>
+          <view class='form-item {{schoolRequire ? "form-warn" : ""}}'>
             <image class='input-icon' src='../../resources/image/icon_school.png'></image>
-            <input class='form-input' confirm-type='next' bindblur='validateRequire' id='school' type='text' name="school" placeholder="请输入学校名" />
+            <input class='form-input' confirm-type='next' bindblur='validateRequire' bindinput='validateRequire' id='school' type='text' name="school" placeholder="请输入学校名" />
+            <icon type='warn' color='#E64340' size='23' wx:if='{{schoolRequire}}'></icon>
           </view>
-          <view class='form-item'>
+          <view class='form-item {{userRequire ? "form-warn" : ""}}'>
             <image class='input-icon' src='../../resources/image/icon_user.png'></image>
-            <input  class='form-input' confirm-type='next' bindblur='validateRequire' type='text' name="userName" placeholder="请输入账号" />
+            <input  class='form-input' confirm-type='next' bindblur='validateRequire' bindinput='validateRequire' id='user' type='text' name="userName" placeholder="请输入账号" />
+            <icon type='warn' color='#E64340' size='23' wx:if='{{userRequire}}'></icon>
           </view>
-          <view class='form-item'>
+          <view class='form-item {{passwordRequire ? "form-warn" : ""}}'>
             <image class='input-icon' src='../../resources/image/icon_lock.png'></image>
-            <input  class='form-input' confirm-type='done' bindblur='validateRequire' name="password" type='password' placeholder="请输入密码" />
+            <input  class='form-input' confirm-type='done' bindblur='validateRequire' bindinput='validateRequire' id='password' name="password" type='password' placeholder="请输入密码" />
+            <icon type='warn' color='#E64340' size='23' wx:if='{{passwordRequire}}'></icon>
           </view>
           <view class='button-group'>
             <button class='submit-button' formType="submit">登录</button>

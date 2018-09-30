@@ -1,12 +1,16 @@
 // pages/login/login.js
+import {login} from '../../service/user.js';
+import { isStringEmpty } from '../../utils/util.js';
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    schoolRequire:false,
-    userRequire:false,
-    passwordRequire: false
+    schoolRequire: false,
+    userRequire: false,
+    passwordRequire: false,
+    showTopTips: false,
+    errorMessage: null
   },
 
   /**
@@ -14,18 +18,18 @@ Page({
    */
   onLoad: function (options) {
   },
-  validateRequire: (e) => {
+  validateRequire: function(e) {
     console.log('验证', e);
     const id = e.currentTarget.id;
     let str = e.detail.value;
     const flag = !str.trim().length;
-    switch (str) {
+    switch (id) {
       case 'school':
       this.setData({
         schoolRequire: flag
       })
       break;
-      case 'userName':
+      case 'user':
       this.setData({
         userRequire: flag
       })
@@ -37,41 +41,104 @@ Page({
       break;
 
     }
-    if (!str.trim().length) {
+    return str;
+  },
+  handleInput: function (e) {
+    console.log('验证', e);
+    const id = e.currentTarget.id;
+    let str = e.detail.value;
+    this.validateRequire();
+  },
+  showWarningMsg: function (msg) {
+    this.setData({
+      showTopTips: true,
+      errorMessage: msg
+    });
+    const that = this;
+    setTimeout(function () {
+      that.setData({
+        showTopTips: false,
+        errorMessage: null
+      });
+    }, 3000);
+
+  },
+  validateForm: function(values) {
+    let errorMsg = '';
+    if (isStringEmpty(values.school)) {
+      this.setData({
+        schoolRequire: true
+      })
+    }
+    if (isStringEmpty(values.userName)) {
+      this.setData({
+        userRequire: true
+      })
+    }
+    if (isStringEmpty(values.password)) {
+      this.setData({
+        passwordRequire: true
+      })
+    }
+    if (this.data.schoolRequire || this.data.userRequire || this.data.passwordRequire) {
+      errorMsg = '请检查表单';
+      this.showWarningMsg(errorMsg);
+      return false;
+    } else {
+      return true;
     }
   },
-  formSubmit: (e) => {
+  formSubmit: function(e) {
     console.log('form发生了submit事件，携带数据为：', e);
     const value = e.detail.value;
-    if (!value) {
-      wx.showToast({
-        title: '检查表单',
-      })
-      return;
+    if (!this.validateForm(value)) {
+      return false;
     }
-    wx.request({
-      url: 'http://172.16.168.161:8025/api/TokenAuth/Authenticate',
-      method: 'post',
-      data: {
-        userName: value.userName,
-        password: value.password
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        if (res.data.success) {
-          wx.setStorageSync('accessInfo', res.data.result);
-          wx.showToast({
-            title: '登陆成功'
-          })
-          wx.redirectTo({
-            url: '/pages/userInfo/userInfo',
-          })
-        }
-        console.log(res.data.result);
+    login({
+      userName: value.userName,
+      password: value.password
+    }).then((res) => {
+      if (res.data.success) {
+        wx.setStorageSync('accessInfo', res.data.result);
+        wx.redirectTo({
+          url: '/pages/userInfo/userInfo',
+        })
+      }else {
+        wx.showToast({
+          title: '登陆失败',
+          icon: 'none'
+        })
+        this.showWarningMsg(res.data.error.message);
       }
+      console.log('登陆', res);
     })
+    .catch(error => {
+      wx.showToast({
+        title: '登陆失败,请检查网络',
+        icon: 'none'
+      })
+      this.showWarningMsg(error.message);
+    })
+    // wx.request({
+    //   url: 'http://172.16.168.161:8025/api/TokenAuth/Authenticate',
+    //   method: 'post',
+    //   data: ,
+    //   header: {
+    //     'content-type': 'application/json' // 默认值
+    //   },
+    //   success(res) {
+    //     if (res.data.success) {
+    //       wx.setStorageSync('accessInfo', res.data.result);
+    //       wx.showToast({
+    //         title: '登陆成功'
+    //       })
+    //       wx.redirectTo({
+    //         url: '/pages/userInfo/userInfo',
+    //       })
+    //     }
+    //     console.log('登陆',res.data.result);
+    //   }
+    // })
   },
 
   /**

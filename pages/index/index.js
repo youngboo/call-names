@@ -15,7 +15,6 @@ Page({
   onLoad: function (options) {
     const accessInfo = wx.getStorageSync('accessInfo');
     const userInfo = wx.getStorageSync('userInfo');   
-    console.log('userInfo', userInfo);
     if (accessInfo === null || userInfo === null || isEmpty(userInfo)) {
       wx.redirectTo({
         url: '/pages/login/login',
@@ -25,7 +24,7 @@ Page({
         url: '/pages/userInfo/userInfo',
       })
     }
-    console.log('accessInfo1', accessInfo);
+    console.log('登陆信息：', accessInfo);
 
   },
 
@@ -33,7 +32,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log("index页面渲染了")
+    console.log("index页面ready");
   },
 
   /**

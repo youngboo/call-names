@@ -15,7 +15,9 @@ Component({
    * 组件的初始数据
    */
   data: {
-    attendCount: 0
+    attendCount: 0,
+    showTopTips: false,
+    errorMessage: null
   },
 
   /**
@@ -34,6 +36,20 @@ Component({
         studentsList: this.data.studentsList,
         attendCount: checkedList.length
       })
+    },
+    showWarningMsg: function(msg) {
+      this.setData({
+        showTopTips: true,
+        errorMessage: msg
+      });
+      const that = this;
+      setTimeout(function () {
+        that.setData({
+          showTopTips: false,
+          errorMessage: null
+        });
+      }, 3000);
+
     },
     submitNames: function (e) {
       wx.showModal({
@@ -66,6 +82,7 @@ Component({
       })
       const courseId = this.properties.courseInfo.courseId;
       const idList = getValueListFromArray(submitList, 'id');
+      const self = this;
       updateAttendance({
         courseId: courseId,
         studentIdList: idList,
@@ -75,14 +92,12 @@ Component({
         .then((res) => {
           console.log('提交返回数据', res);
           if(!res.data.success && res.data.error) {
-            wx.showToast({
-              title: res.data.error.message,
-              icon: 'none',
-              duration: 3000
-            });
-            this.setData({
-              errorMessage: res.data.error.message
-            })
+            // wx.showToast({
+            //   title: res.data.error.message,
+            //   icon: 'none',
+            //   duration: 3000
+            // });
+            this.showWarningMsg(res.data.error.message);
           }else {
             this.triggerEvent('backEvent', { showNames: false });
           }

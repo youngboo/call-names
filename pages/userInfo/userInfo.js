@@ -19,6 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('userInfo页面load了');
     if(this.data.currentWeek === null) {
       this.initWeeks();
     }
@@ -346,7 +347,7 @@ Page({
     })
     wx.removeStorageSync('accessInfo');
     wx.removeStorageSync('userInfo');
-    wx.navigateTo({
+    wx.redirectTo({
       url: '/pages/index/index',
     })
   },

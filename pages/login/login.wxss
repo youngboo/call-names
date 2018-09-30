@@ -1,4 +1,33 @@
 /* pages/login/login.wxss */
+.names-title {
+  position: fixed;
+  display: flex;
+  align-items: left;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  top: 0px;
+  left:0px;
+  right:0px;
+  height:auto;
+  margin-left:auto;
+  margin-right:auto;
+  background: #FFFFFF;
+  text-align: center;
+  font-size: 16px;
+  color: #333333;
+  letter-spacing: 0.11px;
+}
+  .warn-message {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    margin-left: 10vw;
+    padding: 10px;
+  }
+    .warn-icon {
+      margin-right:7px;
+    }
 .login-container {
   display: flex;
   flex-wrap: nowrap;
@@ -15,7 +44,7 @@
   background: #fff;
   width: 80vw;
   border-radius: 10px;
-  min-height: 50vh;
+  min-height: auto;
 }
 .form-box {
   width:90%;
@@ -51,6 +80,10 @@
   align-content: center;
   flex-wrap: nowrap;
   margin: 0.5em;
+}
+.form-warn {
+  color: #E64340;
+  border-color: #E64340;
 }
 .input-icon {
   width: 1.4em;

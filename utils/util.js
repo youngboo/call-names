@@ -84,6 +84,12 @@ const isString = (str) => {
     return false
   }
 }
+const isStringEmpty = (str) => {
+  if (isString(str)) {
+    return !str.trim().length;
+  }
+  return false;
+}
 /**
  * 判断数组，对象是否是空
  * @param value
@@ -211,6 +217,11 @@ const groupByValue = (list, value) => {
   });
   return dest;
 }
+const showWarningMsg = (msg, time, callBack) => {
+  setTimeout(() => {
+    
+  },time)
+}
 
 module.exports = {
   formatTime: formatTime,
@@ -219,5 +230,6 @@ module.exports = {
   getWeeks: getWeeks,
   patternDate: patternDate,
   groupByValue: groupByValue,
+  isStringEmpty: isStringEmpty,
   getValueListFromArray, getValueListFromArray
 }

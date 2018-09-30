@@ -30,6 +30,7 @@
     display: flex;
     align-items: center;
     margin-left: 10vw;
+    padding: 10px;
   }
     .warn-icon {
       margin-right:7px;

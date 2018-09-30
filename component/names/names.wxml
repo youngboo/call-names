@@ -4,7 +4,7 @@
     <text>{{courseInfo.name}}</text>
     <text>{{attendCount}}/{{studentsList.length}}</text>
   </view>
-  <view class='warn-message' wx:if='{{errorMessage}}'>
+  <view class='warn-message' wx:if='{{showTopTips}}'>
     <icon class='warn-icon' type="warn" size="16" color="#FF5858"/>
     <text>{{errorMessage}}</text>
   </view>
