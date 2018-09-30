@@ -2,13 +2,11 @@
   "pages": [
     "pages/index/index",
     "pages/login/login",
-    "pages/userInfo/userInfo",
-    "pages/names/names"
+    "pages/userInfo/userInfo"
   ],
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "点名",
-    "navigationBarTextStyle": "black"
+    "navigationBarTitleText": "中育考勤",
+    "navigationBarBackgroundColor": "#7DA6DF",
+    "navigationBarTextStyle": "white"
   }
 }

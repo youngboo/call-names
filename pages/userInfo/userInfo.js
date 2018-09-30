@@ -62,9 +62,6 @@ Page({
   onTapCourse: function(e) {
     console.log(e, '点击课程');
     this.showNames(e.detail);
-    // wx.navigateTo({
-    //   url: `/pages/names/names?id=${e.detail.id}&courseName=${e.detail.name}&courseName=${e.detail.ids}`,
-    // })
   },
   onBackIndex: function(e) {
     console.log(e);
@@ -179,6 +176,9 @@ Page({
       });
   },
  
+ /**
+  * 按周天排列课程
+  **/
   getCourseListByWeekday: function(list) {
     const newList = list.map((item) => {
       return {
@@ -223,54 +223,54 @@ Page({
     this.setData({
       courseList: weekdayList
     })
-    console.log('weekdaylist', weekdayList);
+   // console.log('weekdaylist', weekdayList);
   },
-  generatorCourseList: function(list) {
-    let allList = [];
-    const length = this.data.currentWeek.weekInfo.weeks.length;
-    list.forEach((item) => {
-      const courselist = item.courseSchedules;
-      const weekIndex = Number(item.courseSchedules[0].schedule.weekday) - 1;
-      const attendList = item.attendanceRecordList;
-      this.getCourseAttendInfo(courselist, attendList);
-      allList.push({
-        time: patternDate(new Date(this.data.currentWeek.weekInfo.weeks[weekIndex]),"yyyy-MM-dd EEE"),
-          content: item.content,
-          courseList: item.courseSchedules.map((course, courseIndex) => {
-            return {
-              name: item.name,
-              content: `第${course.schedule.index}节`,
-              state: this.getState(attendList, courseIndex),
-              id: course.courseId,
-              stuIds: this.getIdList(attendList, courseIndex),
-            }
-          })
-        })
-    });
-    this.setData({
-      courseList: allList
-    })
-    // console.log(courseList);
-  },
+  // generatorCourseList: function(list) {
+  //   let allList = [];
+  //   const length = this.data.currentWeek.weekInfo.weeks.length;
+  //   list.forEach((item) => {
+  //     const courselist = item.courseSchedules;
+  //     const weekIndex = Number(item.courseSchedules[0].schedule.weekday) - 1;
+  //     const attendList = item.attendanceRecordList;
+  //     this.getCourseAttendInfo(courselist, attendList);
+  //     allList.push({
+  //       time: patternDate(new Date(this.data.currentWeek.weekInfo.weeks[weekIndex]),"yyyy-MM-dd EEE"),
+  //         content: item.content,
+  //         courseList: item.courseSchedules.map((course, courseIndex) => {
+  //           return {
+  //             name: item.name,
+  //             content: `第${course.schedule.index}节`,
+  //             state: this.getState(attendList, courseIndex),
+  //             id: course.courseId,
+  //             stuIds: this.getIdList(attendList, courseIndex),
+  //           }
+  //         })
+  //       })
+  //   });
+  //   this.setData({
+  //     courseList: allList
+  //   })
+  //   // console.log(courseList);
+  // },
   //处理课位和考勤信息，如果是两节联排则合到一起，再把考勤信息加入 
-  getCourseAttendInfo(courseList, attendList) {
-    // 以下两步根据课程整合课位
-    const newCourseList = groupByValue(courseList, 'courseId');
-    const newAttendList = groupByValue(attendList, 'courseId');
-    newCourseList.map((item) => {
-      //item.valueList.sort
-      //如果有考勤记录就整合，没有就忽略，认为未点名
-      return {
-        id: item.id,
-        name: item.name,
-        content: this.getScheduleText(),
-        state: this.getState(),
-        attendId:0
-      }
+  // getCourseAttendInfo(courseList, attendList) {
+  //   // 以下两步根据课程整合课位
+  //   const newCourseList = groupByValue(courseList, 'courseId');
+  //   const newAttendList = groupByValue(attendList, 'courseId');
+  //   newCourseList.map((item) => {
+  //     //item.valueList.sort
+  //     //如果有考勤记录就整合，没有就忽略，认为未点名
+  //     return {
+  //       id: item.id,
+  //       name: item.name,
+  //       content: this.getScheduleText(),
+  //       state: this.getState(),
+  //       attendId:0
+  //     }
 
-    })
-    console.log(newCourseList);
-  },
+  //   })
+  //   console.log(newCourseList);
+  // },
   getScheduleText(scheduleList) {
     scheduleList.sort((a, b)=>{
       if (a.schedule.index > b.schedule.index) {
@@ -319,30 +319,30 @@ Page({
     }
     return state;
   },
-  getState(attendList, index) {
-    let state = {
-      text: '未点名',
-      color: 'text-third' 
-    };
-    if (attendList && attendList.length && attendList.length > 0) {
-      const courseInfo = attendList[index];
-      if (courseInfo && courseInfo.absentStudents) {
-        const count = courseInfo.absentStudents.length;
-        if (count && count > 0) {
-          state = {
-            text: `缺勤${count}人`,
-            color: 'text-red'
-          };
-        }else {
-          state = {
-            text: '满勤',
-            color: 'text-blue'
-          }
-        }
-      }
-    } 
-    return state;
-  },
+  // getState(attendList, index) {
+  //   let state = {
+  //     text: '未点名',
+  //     color: 'text-third' 
+  //   };
+  //   if (attendList && attendList.length && attendList.length > 0) {
+  //     const courseInfo = attendList[index];
+  //     if (courseInfo && courseInfo.absentStudents) {
+  //       const count = courseInfo.absentStudents.length;
+  //       if (count && count > 0) {
+  //         state = {
+  //           text: `缺勤${count}人`,
+  //           color: 'text-red'
+  //         };
+  //       }else {
+  //         state = {
+  //           text: '满勤',
+  //           color: 'text-blue'
+  //         }
+  //       }
+  //     }
+  //   } 
+  //   return state;
+  // },
   logout: function() {
     this.setData({
       userInfo: null
@@ -352,32 +352,5 @@ Page({
     wx.redirectTo({
       url: '/pages/index/index',
     })
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    // const self = this;
-    // const accessInfo = wx.getStorageSync("accessInfo");
-    // wx.request({
-    //   url: 'http://172.16.168.161:8025/api/services/app/User/GetInfoAsync',
-    //   method: 'get',
-    //   data: {},
-    //   header: {
-    //     'content-type': 'application/json', // 默认值
-    //     'Authorization': 'Bearer ' + accessInfo.accessToken
-    //   },
-    //   success: (res) => {
-    //     console.log('验证成功');
-    //     console.log(res);
-    //     let photo = res.data.result.photo;
-    //     res.data.result.photo = photo + '?x-oss-process=image/resize,l_32';
-    //     wx.setStorageSync('userInfo', res.data.result);
-    //     self.setData({
-    //       userInfo: res.data.result,
-    //     })    
-    //   }
-    // })
-    
-  },
+  }
 })

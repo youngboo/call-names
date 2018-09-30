@@ -1,5 +1,7 @@
 {
-  "navigationBarTitleText": "用户信息",
+  "navigationBarTitleText": "点名",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "fff",
   "usingComponents": {
     "course-list": "/component/course-list/course-list",
     "week-selector": "/component/week-selector/week-selector",

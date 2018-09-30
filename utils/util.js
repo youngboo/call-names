@@ -28,7 +28,7 @@ const formatNumber = n => {
  * (new Date()).pattern("yyyy-MM-dd EEE hh:mm:ss") ==> 2009-03-10 星期二 08:09:04       
  * (new Date()).pattern("yyyy-M-d h:m:s.S") ==> 2006-7-2 8:9:4.18       
  */
-const patternDate = function (date,fmt) {
+const patternDate = function(date, fmt) {
   var o = {
     "M+": date.getMonth() + 1, //月份           
     "d+": date.getDate(), //日           
@@ -154,22 +154,22 @@ const getWeeks = (now) => {
   let init = true;
   let weeks = [];
   let isCurrent = false;
-  while(tmpDay < nextYear) {
+  while (tmpDay < nextYear) {
     if (current === tmpDay) {
       isCurrent = true;
     }
     weeks.push(tmpDay);
     if (new Date(tmpDay).getDay() === 0) {
-      map[tmpDay] = new WeekObj(weeks);
+      // map[tmpDay] = new WeekObj(weeks);
       const start = new Date(weeks[0]);
       const end = new Date(weeks[weeks.length - 1]);
-      const title = `${start.getFullYear()}-${start.getMonth() + 1}-${start.getDate()}~${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`;
+      const title = `${start.getFullYear()}-${start.getMonth() + 1}-${start.getDate()} ~ ${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()}`;
       list.push({
-        isCurrent : isCurrent,
+        isCurrent: isCurrent,
         weekInfo: {
           weeks: weeks,
           start: weeks[0],
-          end: weeks[weeks.length-1],
+          end: weeks[weeks.length - 1],
           title: title
         }
       });
@@ -190,7 +190,7 @@ const loginInfo = () => {
   const accessInfo = wx.getStorageSync('accessInfo');
   if (accessInfo && accessInfo.accessToken) {
     return accessInfo.accessToken;
-  }else {
+  } else {
     return null;
   }
 }
@@ -219,8 +219,8 @@ const groupByValue = (list, value) => {
 }
 const showWarningMsg = (msg, time, callBack) => {
   setTimeout(() => {
-    
-  },time)
+
+  }, time)
 }
 
 module.exports = {
@@ -231,5 +231,6 @@ module.exports = {
   patternDate: patternDate,
   groupByValue: groupByValue,
   isStringEmpty: isStringEmpty,
-  getValueListFromArray, getValueListFromArray
+  getValueListFromArray,
+  getValueListFromArray
 }
