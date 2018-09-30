@@ -4,13 +4,13 @@
     <view class='title-bar'>
       <view class='user-info'>
         <view class='image-box'>
-          <image class='user-image' src='{{userInfo.photo}}'></image>
+          <image class='user-image' src='{{userInfo ? userInfo.photo: ""}}'></image>
         </view>
-        <text class='user-name'>{{userInfo.realName}}</text>
+        <text class='user-name'>{{userInfo? userInfo.realName: ''}}</text>
       </view>
       <view class='bar-item' bindtap='logout'>
-        <image class='close-icon' src='../../resources/image/icon_close.png'></image>
-        <text>注销</text>
+        <image class='close-icon' src='../../resources/image/icon_close@2x.png'></image>
+        <text class='item-text'>注销</text>
       </view>
     </view>
     <view class='divider-box'>

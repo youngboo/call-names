@@ -17,18 +17,26 @@
   border-radius: 10px;
   min-height: 50vh;
 }
+.form-box {
+  width:90%;
+  align-self:center;
+}
 .login-title {
   flex: 0 1 auto;
   text-align: center;
   align-content: center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 .title-text {
-  font-family: PingFangSC-Medium;
-  font-size: 20px;
+  font-size: 18px;
   color: #333333;
-  letter-spacing: 0.13px;
+  letter-spacing: 7px;
+  text-indent: 7px;
   text-align: center;
-  line-height:4em;
+  line-height:3em;
+  font-weight:600;
 }
 .form-container {
   display: flex;
@@ -36,24 +44,37 @@
   flex-direction: column;
 }
 .form-item {
-  border: 1px solid #7da6df;
-  border-radius: 10px;
+  border: 1px solid #D8DCD7;
+  border-radius: 8px;
   padding: 0.5em;
   display: flex;
   align-content: center;
   flex-wrap: nowrap;
-  margin: 0.5rem;
+  margin: 0.5em;
 }
 .input-icon {
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1.4em;
+  height: 1.4em;
+}
+.button-group {
+  padding: 0;
+  margin: 0.5em;
+  margin-bottom: 1.5em;
 }
 .submit-button {
-  display: flex;
+  line-height: 2.9em;
+  display: block;
+  padding-left:14px;
+  padding-right:14px;
+  box-sizing:border-box;
+  font-size:14px;
+  text-decoration:none;
   border-radius: 30px;
   background: #5997FA;
   text-align: center;
   color: #fff;
+  letter-spacing:4px;
+  text-indent:4px;
 }
   .submit-button .button-text {
     border: 0;

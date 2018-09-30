@@ -3,7 +3,7 @@
 
 /*外部容器*/
 .listview-container {
-    margin: 10rpx 10rpx;
+  margin: 0;
 }
 
 /*行样式*/
@@ -61,12 +61,12 @@
   display:flex;
   justify-content:space-between;
   align-items:center;
-  width:80vw;
+  width:75vw;
   border:0.5pt solid #E4E7F0;
-  border-radius:4pt;
-  height:3em;
-  margin-bottom:0.5em;
-  font-size: 11pt;
+  border-radius:4px;
+  height:5.5em;
+  margin-bottom:1em;
+  font-size: 11px;
 }
   .info-box {
     margin-left: 0.5em;
@@ -103,6 +103,7 @@
     font-size: 28rpx;
     line-height: 56rpx;
     color: #999;
+    margin-bottom: 2em;
 }
 .text-third {
   color: #999999;

@@ -21,12 +21,12 @@
   align-content: center;
 }
 .title-text {
-  font-family: PingFangSC-Medium;
   font-size: 20px;
   color: #333333;
-  letter-spacing: 0.13px;
+  letter-spacing: 7px;
   text-align: center;
-  line-height:4em;
+  line-height:3em;
+  font-weight:200;
 }
 .form-container {
   display: flex;

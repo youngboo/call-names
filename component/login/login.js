@@ -14,8 +14,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    userName:'admin',
-    password:''
+    userName:null,
+    password:null
   },
 
   /**
@@ -25,6 +25,9 @@ Component({
     getLoginInfo:() => {
 
     },
+    validateRequire:(e) => {
+      console.log('验证', e);
+    },
     formSubmit: (e) => {
       console.log('form发生了submit事件，携带数据为：', e);
       const value = e.detail.value;
@@ -32,18 +35,19 @@ Component({
         wx.showToast({
           title: '检查表单',
         })
-        return;
+        return false;
       }
       wx.showLoading({
         title: '正在登陆',
       })
       login(value)
         .then((res, rej) => {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '/pages/userInfo/userInfo',
           });
         })
         .catch(e => {
+          console.log(e,"登陆错误信息");
           wx.showToast({
             title: '登陆失败',
           })

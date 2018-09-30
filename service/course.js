@@ -20,6 +20,10 @@ const getCourseList = (data) => {
   });
 }
 const getStudentsList = (data) => {
+  data = {
+    maxResultCount: 1000,
+    ...data
+  }
   return new Promise((resolve, reject) => {
     wx.request({
       url: API.studentList,

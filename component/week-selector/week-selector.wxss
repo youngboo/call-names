@@ -5,6 +5,7 @@
   margin-top: 1em;
   align-items:center;
   justify-content:space-around;
+  margin-bottom: 1em;
 }
   .back-img {
     width: 16px;

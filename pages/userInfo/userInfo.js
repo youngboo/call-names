@@ -23,7 +23,8 @@ Page({
       this.initWeeks();
     }
     const currentWeek = this.data.currentWeek;
-    if (this.data.userInfo === null) {
+    const userInfo = wx.getStorageSync('userInfo');
+    if (!userInfo || !this.data.userInfo) {
       getUserInfo()
         .then((res) => {
           this.setData({
@@ -159,7 +160,7 @@ Page({
       .then((res) => {
         console.log(res);
         let list = res.data.result;
-        if (!!list.length && list.length > 0) {
+        if (list && !!list.length && list.length > 0) {
           //this.generatorCourseList(res.data.result);
           this.getCourseListByWeekday(list);
         }else {
@@ -340,6 +341,9 @@ Page({
     return state;
   },
   logout: function() {
+    this.setData({
+      userInfo: null
+    })
     wx.removeStorageSync('accessInfo');
     wx.removeStorageSync('userInfo');
     wx.navigateTo({

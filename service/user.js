@@ -1,7 +1,11 @@
 import { API } from '../config/ApiConfig.js'
 import { isEmpty } from '../utils/util.js'
-const accessInfo = wx.getStorageSync("accessInfo");
 const login = (data) => {
+    wx.showLoading({
+      title: '登陆中...',
+    })
+    wx.removeStorageSync('userInfo');
+    wx.removeStorageSync('accessInfo');
     return new Promise((resolve, reject) => {
       wx.request({
         url: API.login,
@@ -21,6 +25,9 @@ const login = (data) => {
             wx.setStorageSync('accessInfo', res.data.result);
             resolve(res);
           } 
+        },
+        complete() {
+          wx.hideLoading();
         }
       })
     });  
@@ -29,6 +36,7 @@ const login = (data) => {
    * 从缓存或网络异步获取用户信息
    */
 const getUserInfo = () => {
+    const accessInfo = wx.getStorageSync("accessInfo");
     return new Promise((resolve, reject) => {
       const userInfo = wx.getStorageSync('userInfo');
       console.log(userInfo);
@@ -45,9 +53,15 @@ const getUserInfo = () => {
           },
           success: (res) => {
             console.log(res);
-            let photo = res.data.result.photo;
-            res.data.result.photo = photo + '?x-oss-process=image/resize,l_32';
-            wx.setStorageSync('userInfo', res.data.result);
+            const userInfo = res.data.result;
+            let photo = null;
+            if (userInfo.photo) {
+                photo = userInfo.photo + '?x-oss-process=image/resize,l_32';
+            } else {
+              photo = '../../resources/image/icon_teacher.png';
+            }
+            userInfo.photo = photo;
+            wx.setStorageSync('userInfo', userInfo);
             resolve(res.data.result);
           }
         })

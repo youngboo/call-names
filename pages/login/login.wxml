@@ -5,24 +5,26 @@
     <view class='login-title'>
       <text class='title-text'>登录</text>
     </view>
-    <view>
+    <view class='form-box'>
       <form bindsubmit="formSubmit">
         <view class='form-container'>
-          <view class='form-item'>
+          <view class='form-item {{schoolRequire}}'>
             <image class='input-icon' src='../../resources/image/icon_school.png'></image>
-            <input class='form-input' name="school" placeholder="请输入学校名" />
+            <input class='form-input' confirm-type='next' bindblur='validateRequire' id='school' type='text' name="school" placeholder="请输入学校名" />
           </view>
           <view class='form-item'>
             <image class='input-icon' src='../../resources/image/icon_user.png'></image>
-            <input  class='form-input' name="userName" placeholder="请输入账号" />
+            <input  class='form-input' confirm-type='next' bindblur='validateRequire' type='text' name="userName" placeholder="请输入账号" />
           </view>
           <view class='form-item'>
             <image class='input-icon' src='../../resources/image/icon_lock.png'></image>
-            <input  class='form-input' name="password" type='password' placeholder="请输入密码" />
+            <input  class='form-input' confirm-type='done' bindblur='validateRequire' name="password" type='password' placeholder="请输入密码" />
           </view>
-          <view class='form-item submit-button'>
-            <button class='button-text' formType="submit">登录</button>
+          <view class='button-group'>
+            <button class='submit-button' formType="submit">登录</button>
           </view>
+          <!-- <view class=''>    
+          </view> -->
         </view>
       </form>
     </view>

@@ -4,16 +4,41 @@ Page({
    * 页面的初始数据
    */
   data: {
-    loginSuccess:() => {
-      console.log("成功了");
-    }
+    schoolRequire:false,
+    userRequire:false,
+    passwordRequire: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+  },
+  validateRequire: (e) => {
+    console.log('验证', e);
+    const id = e.currentTarget.id;
+    let str = e.detail.value;
+    const flag = !str.trim().length;
+    switch (str) {
+      case 'school':
+      this.setData({
+        schoolRequire: flag
+      })
+      break;
+      case 'userName':
+      this.setData({
+        userRequire: flag
+      })
+      break;
+      case 'password':
+      this.setData({
+        passwordRequire: flag
+      })
+      break;
 
+    }
+    if (!str.trim().length) {
+    }
   },
   formSubmit: (e) => {
     console.log('form发生了submit事件，携带数据为：', e);
@@ -40,7 +65,7 @@ Page({
           wx.showToast({
             title: '登陆成功'
           })
-          wx.navigateTo({
+          wx.redirectTo({
             url: '/pages/userInfo/userInfo',
           })
         }

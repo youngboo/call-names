@@ -3,6 +3,9 @@ view {
   font-size: 14px;
   color: #333333;
 }
+text {
+  font-family:PingFangSC-Regular, "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
 .text-main {
   color: #333333;
 }
