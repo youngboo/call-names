@@ -18,6 +18,7 @@
     background: #F6FAFF;
     border-radius: 3px;
     text-align: center;
+    font-size: 11px;
   }
 
  button {

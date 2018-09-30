@@ -77,7 +77,8 @@
   border-radius: 8px;
   padding: 0.5em;
   display: flex;
-  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
   flex-wrap: nowrap;
   margin: 0.5em;
 }
@@ -85,9 +86,17 @@
   color: #E64340;
   border-color: #E64340;
 }
+.image-box {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:24px;
+  width:24px;
+}
 .input-icon {
-  width: 1.4em;
-  height: 1.4em;
+  width: 20px;
+  height: 20px;
 }
 .button-group {
   padding: 0;

@@ -99,7 +99,7 @@ Component({
             // });
             this.showWarningMsg(res.data.error.message);
           }else {
-            this.triggerEvent('backEvent', { showNames: false });
+            this.triggerEvent('backEvent', { showNames: false, reload: true});
           }
           // wx.redirectTo({
           //   url: '/pages/userInfo/userInfo',
@@ -107,7 +107,7 @@ Component({
         })
     },
     backIndex: function(e) {
-      this.triggerEvent('backEvent', {showNames: false});
+      this.triggerEvent('backEvent', {showNames: false, reload: false});
     }
   }
 })

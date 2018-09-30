@@ -68,7 +68,9 @@ Page({
   },
   onBackIndex: function(e) {
     console.log(e);
-    this.reloadCourseList();
+    if (e.detail.reload) {
+      this.reloadCourseList();
+    }
     this.setData({
       showNames: e.detail.showNames
     })
