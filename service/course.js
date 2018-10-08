@@ -2,8 +2,8 @@ import { API } from '../config/ApiConfig.js';
 /**
  * 根据条件查询所有课程的考勤记录
  */
-const accessInfo = wx.getStorageSync("accessInfo");
 const getCourseList = (data) => {
+  const accessInfo = wx.getStorageSync("accessInfo");
   return new Promise((resolve, reject) => {
     wx.request({
       url: API.courses,
@@ -20,6 +20,7 @@ const getCourseList = (data) => {
   });
 }
 const getStudentsList = (data) => {
+  const accessInfo = wx.getStorageSync("accessInfo");
   data = {
     maxResultCount: 1000,
     ...data
@@ -40,6 +41,7 @@ const getStudentsList = (data) => {
   });
 }
 const updateAttendance = (data) => {
+  const accessInfo = wx.getStorageSync("accessInfo");
   return new Promise((resolve, reject) => {
     wx.request({
       url: API.updateAttendance,
