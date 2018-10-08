@@ -4,11 +4,10 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 100%;
+  width: 90%;
   top: 0px;
   left:0px;
   right:0px;
-  height:1em;
   margin-left:auto;
   margin-right:auto;
   background: #FFFFFF;
@@ -16,9 +15,12 @@
   font-size: 16px;
   color: #333333;
   letter-spacing: 0.11px;
+  border-radius: 8px;
+  line-height: 16px;
+  height: 20px;
 }
 .name-container {
-  margin-top:1.5em;
+  margin-top:2em;
 }
 .student-item {
   margin: 5px;

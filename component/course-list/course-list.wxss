@@ -103,7 +103,7 @@
     font-size: 28rpx;
     line-height: 56rpx;
     color: #999;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 .text-third {
   color: #999999;

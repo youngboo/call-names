@@ -8,7 +8,8 @@ Component({
   properties: {
     studentsList:null,
     courseInfo: null,
-    attendCount: null
+    attendCount: null,
+    overTime: null
   },
 
   /**
@@ -17,7 +18,7 @@ Component({
   data: {
     attendCount: 0,
     showTopTips: false,
-    errorMessage: null
+    errorMessage: '点名已超过40分钟，无法再修改'
   },
 
   /**
@@ -25,6 +26,9 @@ Component({
    */
   methods: {
     tapName: function (e) {
+      if (this.properties.overTime) {
+        return false;
+      }
       console.log('点名了', e);
       const index = e.currentTarget.dataset.index;
       let checked = this.data.studentsList[index].checked;

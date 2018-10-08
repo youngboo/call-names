@@ -2,6 +2,7 @@
 import { getWeeks, patternDate, getValueListFromArray, groupByValue } from '../../utils/util.js';
 import { getUserInfo } from '../../service/user.js'
 import { getCourseList, getStudentsList } from '../../service/course.js'
+import { G_CONFIG } from '../../config/GlobalConfig.js'
 Page({
   /**
    * 页面的初始数据
@@ -77,7 +78,13 @@ Page({
     const info = detail.info;
     const attend = info.attend;
     let students = null;
-    let attendCount = 0; 
+    let attendCount = 0;
+    let overTime = false;
+    if (attend) {
+      if (new Date().getTime() - new Date(attend.creationTime).getTime() > G_CONFIG.OVER_TIME * 60 * 1000) {
+        overTime = true;
+      }
+    } 
     if (attend && attend.absentStudents.length && attend.absentStudents.length > 0) {
       students = getValueListFromArray(attend.absentStudents, 'studentId');
     }
@@ -111,7 +118,8 @@ Page({
             showNames: true,
             studentsList: list,
             courseInfo: info,
-            attendCount: attendCount
+            attendCount: attendCount,
+            overTime: overTime
           })
         } else {
           wx.showToast({

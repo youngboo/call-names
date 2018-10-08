@@ -1,32 +1,48 @@
-<view class='names-title'>
-  <view class='title-top'>
-    <view bindtap='backIndex'><text>返回</text></view>
-    <text>{{courseInfo.name}}</text>
-    <text>{{attendCount}}/{{studentsList.length}}</text>
-  </view>
-  <view class='warn-message' wx:if='{{showTopTips}}'>
-    <icon class='warn-icon' type="warn" size="16" color="#FF5858"/>
-    <text>{{errorMessage}}</text>
-  </view>
-</view>
-<view class='name-container'>
-  <block wx:for='{{studentsList}}' wx:for-item='item' wx:key='*this'>
-    <view class='student-item {{item.checked ? "yes" : "no"}}' bindtap='tapName' id='{{item.id}}' data-index='{{index}}'>
+<view class='names-box'>
 
-      <view class='item-name'>
-        <text class='index-text'>{{index + 1}}</text>
-        <text>{{item.fullName}}</text>
-      </view>
-      <view class='item-class'>
-        <text>{{item.classInfo}}</text>
-      </view>
-      <view class='item-image'>
-        <image src='{{item.checked ? "../../resources/image/icon_right.png" : "../../resources/image/icon_worry.png"}}'></image>
+  <!-- 顶部背景盒 -->
+  <view class='top-box'>
+    <view class='title-box'>
+      <view class='names-title'>
+        <view class='title-top'>
+          <view class='back-container'>
+            <image class='back-image' mode='scaleToFill' bindtap='backIndex' src='../../resources/image/icon_back_inner@2x.png'></image>
+            <text>{{courseInfo.name}}</text>
+          </view>
+          <text>{{attendCount}}/{{studentsList.length}}</text>
+        </view>
+        <view class='warn-message' wx:if='{{overTime}}'>
+          <icon class='warn-icon' type="warn" size="14" color="#FF5858"/>
+          <text>{{errorMessage}}</text>
+        </view>
       </view>
     </view>
-  </block>
-  <view class='place-holder'></view>
-  <view class='submit-button' bindtap='submitNames'>
-    <text>提交点名结果</text>
+
+    <view class='list-box'>
+      <view class='names-list'>
+        <block wx:for='{{studentsList}}' wx:for-item='item' wx:key='item.id'>
+          <view class='student-item {{item.checked ? "yes" : "no"}}' bindtap='tapName' id='{{item.id}}' data-index='{{index}}'>
+
+            <view class='item-name'>
+              <text class='index-text'>{{index + 1}}</text>
+              <text>{{item.fullName}}</text>
+            </view>
+            <view class='item-class'>
+              <text>{{item.classInfo}}</text>
+            </view>
+            <view class='item-image'>
+              <image src='{{item.checked ? "../../resources/image/icon_right.png" : "../../resources/image/icon_worry.png"}}'></image>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view> 
+  </view> 
+
+  <view class='names-bottom'>
+    <view class='submit-button' bindtap='submitNames' wx:if='{{!overTime}}'>
+        <text>提交点名结果</text>
+    </view>
   </view>
+
 </view>
