@@ -31,12 +31,23 @@
 .playlog-item .dotline .dot {
     width: 11px;
     height: 11px; 
+    background: #fff;
+    position: absolute; 
+    top: 22rpx; 
+    left: 9px; 
+    border-radius: 50%; 
+    border:1px solid #E9ECF1;
+
+}
+  .dot .dot-inner {
+    width: 7px;
+    height: 7px; 
     background: #5997FA;
     position: absolute; 
-    top: 10px; 
-    left: 10px; 
-    border-radius: 50%; 
-}
+    top: 2px; 
+    left: 2px; 
+    border-radius: 50%;
+  }
 
 /*时间戳*/
 .playlog-item .dotline .time {
