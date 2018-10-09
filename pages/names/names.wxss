@@ -53,7 +53,7 @@
   justify-content: center;
 }
 .item-class {
-  flex:1 0 50%;
+  flex:1 0 40%;
 }
 .item-image {
   width:24px;

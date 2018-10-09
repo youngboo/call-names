@@ -5,9 +5,9 @@
     <view class='title-box'>
       <view class='names-title'>
         <view class='title-top'>
-          <view class='back-container'>
-            <image class='back-image' mode='scaleToFill' bindtap='backIndex' src='../../resources/image/icon_back_inner@2x.png'></image>
-            <text>{{courseInfo.name}}点名</text>
+          <view class='back-container' bindtap='backIndex'>
+              <image id='back-img' class='back-image' mode='scaleToFill' src='../../resources/image/icon_back_inner@2x.png'></image>
+              <text>{{courseInfo.name}}点名</text>
           </view>
           <text>{{attendCount}}/{{studentsList.length}}</text>
         </view>
@@ -31,7 +31,7 @@
               <text>{{item.classInfo}}</text>
             </view>
             <view class='item-image'>
-              <image src='{{item.checked ? "../../resources/image/icon_right.png" : "../../resources/image/icon_worry.png"}}'></image>
+              <image src='{{item.checked ? "../../resources/image/icon_right@2x.png" : "../../resources/image/icon_worry@2x.png"}}'></image>
             </view>
           </view>
         </block>

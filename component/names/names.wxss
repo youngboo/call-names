@@ -92,6 +92,7 @@
 .back-container {
   display: inline-flex;
   flex-wrap: nowrap;
+  font-weight: 600;
 }
   .back-image {
     width: 16px;
@@ -124,17 +125,18 @@
   box-shadow: 0 0 4px 0 rgba(255,122,119,0.65);
 }
 .item-name {
-  flex:1 0 25%;
+  flex:1 0 30%;
   text-align: left;
+
 }
 .item-class {
-  flex:1 0 50%;
+  flex:1 0 40%;
 }
 .item-image {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  flex:1 0 25%;
+  flex:1 0 30%;
 }
 .item-image image {
   margin-right: 8px;
