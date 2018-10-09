@@ -7,6 +7,7 @@
   justify-content: center;
   width: 90vw;
   border-radius: 8px;
+  margin: 10px;
 }
 .top-box {
   background: #FFFFFF;
@@ -36,7 +37,7 @@
   .list-box {
     flex: 1 0 auto;
     overflow: auto;
-    height: 80vh;
+    height: 76vh;
     width:100%;
   }
     .names-list {
@@ -49,7 +50,7 @@
   .names-bottom {
     flex: none;
     width: 100%;
-    background:#7DA6DF;
+    background:transparent;
     padding-top:10px;
     box-sizing:border-box;
     display: flex;

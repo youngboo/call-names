@@ -20,6 +20,14 @@
     text-align: center;
     font-size: 11px;
     padding: 5px;
+    width:22px;
+    height: 22px;
+  }
+  .back-button .back-img{
+    margin-right: 5px;
+  }
+  .forward-button .back-img{
+    margin-left: 5px;
   }
 
  button {

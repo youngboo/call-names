@@ -9,7 +9,7 @@ Page({
     schoolRequire: false,
     userRequire: false,
     passwordRequire: false,
-    showTopTips: false,
+    showBottomTips: false,
     errorMessage: null
   },
 
@@ -44,20 +44,19 @@ Page({
     return str;
   },
   handleInput: function (e) {
-    console.log('验证', e);
     const id = e.currentTarget.id;
     let str = e.detail.value;
     this.validateRequire();
   },
   showWarningMsg: function (msg) {
     this.setData({
-      showTopTips: true,
+      showBottomTips: true,
       errorMessage: msg
     });
     const that = this;
     setTimeout(function () {
       that.setData({
-        showTopTips: false,
+        showBottomTips: false,
         errorMessage: null
       });
     }, 3000);
@@ -104,10 +103,10 @@ Page({
           url: '/pages/userInfo/userInfo',
         })
       }else {
-        wx.showToast({
-          title: '登陆失败',
-          icon: 'none'
-        })
+        // wx.showToast({
+        //   title: '登陆失败',
+        //   icon: 'none'
+        // })
         this.showWarningMsg(res.data.error.message);
       }
       console.log('登陆', res);
@@ -173,14 +172,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    return false;
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    return false;
   },
 
   /**

@@ -3,6 +3,9 @@ import { API } from '../config/ApiConfig.js';
  * 根据条件查询所有课程的考勤记录
  */
 const getCourseList = (data) => {
+  wx.showLoading({
+    title: '正在加载',
+  })
   const accessInfo = wx.getStorageSync("accessInfo");
   return new Promise((resolve, reject) => {
     wx.request({
@@ -15,6 +18,12 @@ const getCourseList = (data) => {
       },
       success: (res) => {
         resolve(res);
+      },
+      fail: () => {
+        reject('请求失败');
+      },
+      complete: () => {
+        wx.hideLoading();
       }
     })
   });

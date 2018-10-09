@@ -3,8 +3,7 @@
    display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  justify-content: flex-start;
-  background: #7da6df;
+  background: linear-gradient(to bottom, #7da6df, #c9ddf7);
   min-height: 100vh;
   height: auto;
   width: 100%;
@@ -12,20 +11,27 @@
 }
 .names-container {
   border-radius:8px;
+  z-index: 1;
 }
 .no-container {
   display:flex;
   align-items:center;
   justify-content:center;
+  width: 100%;
 }
+  .no-image {
+    width: 100%;
+  }
 .list-box {
   display:flex;
   width:90%;
-  min-height: 98vh;
+  min-height: 95vh;
   height: auto;
   background: #fff;
   flex-direction:column;
   border-radius:8px;
+  margin: 10px;
+  z-index:1;
 }
 .title-bar {
   width: 90%;
@@ -93,4 +99,16 @@
   .list-container {
     width: 100%;
     padding:10px 10px 10px 0px;
+  }
+.bottom-box {
+  position:fixed;
+  bottom:-3px;
+  z-index:0;
+  flex:none;
+  left:0;
+  right:0;
+  width: 100vw;
+}
+  .bottom-image {
+    width: 100%;
   }

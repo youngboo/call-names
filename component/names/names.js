@@ -9,7 +9,8 @@ Component({
     studentsList:null,
     courseInfo: null,
     attendCount: null,
-    overTime: null
+    overTime: null,
+    defaultList: null
   },
 
   /**
@@ -18,7 +19,8 @@ Component({
   data: {
     attendCount: 0,
     showTopTips: false,
-    errorMessage: '点名已超过40分钟，无法再修改'
+    errorMessage: '点名已超过40分钟，无法再修改！',
+    modify: false
   },
 
   /**
@@ -29,7 +31,6 @@ Component({
       if (this.properties.overTime) {
         return false;
       }
-      console.log('点名了', e);
       const index = e.currentTarget.dataset.index;
       let checked = this.data.studentsList[index].checked;
       this.data.studentsList[index].checked = !checked;
@@ -38,22 +39,25 @@ Component({
       })
       this.setData({
         studentsList: this.data.studentsList,
-        attendCount: checkedList.length
+        attendCount: checkedList.length,
+        modify: true
       })
     },
     showWarningMsg: function(msg) {
       this.setData({
-        showTopTips: true,
+        overTime: true,
         errorMessage: msg
       });
-      const that = this;
-      setTimeout(function () {
-        that.setData({
-          showTopTips: false,
-          errorMessage: null
-        });
-      }, 3000);
-
+    },
+    getModifyUserId: function(attend) {
+      let modifyUserId;
+      if (attend.creatorUserId && attend.creatorUserId > 0) {
+        modifyUserId = attend.creatorUserId;
+      }
+      if (attend.lastModifierUserId && attend.lastModifierUserId > 0) {
+        modifyUserId = attend.lastModifierUserId;
+      }
+      return modifyUserId;
     },
     submitNames: function (e) {
       const userInfo = wx.getStorageSync('userInfo');
@@ -63,19 +67,20 @@ Component({
         })
       }
       let confirmText ={
-        title: '您确认要提交点名结果吗？',
-        content: '提交40分钟内可修改'
+        title: '您确认要提交吗？',
+        content: '提交后40分钟内可修改'
       } ;
       const {attend} = this.properties.courseInfo;
-      if (attend && attend.creatorUserId) {
-        if (attend.creatorUserId !== userInfo.id) {
+      if (attend) {
+        const modifyUserId = this.getModifyUserId(attend);
+        if (modifyUserId !== userInfo.id) {
           confirmText = {
-            title: '其他老师已点名，是否确认修改？',
-            content: ''
+            title: '其他老师已点名！',
+            content: '是否确认修改?'
           }
         }else {
           confirmText = {
-            title: '您确认要更新点名记录吗？',
+            title: '您确认要更新吗？',
             content: ''
           }
         }
@@ -118,7 +123,6 @@ Component({
         courseDate: courseDate
       })
         .then((res) => {
-          console.log('提交返回数据', res);
           if(!res.data.success && res.data.error) {
             // wx.showToast({
             //   title: res.data.error.message,
@@ -134,8 +138,46 @@ Component({
           // })
         })
     },
+    isModify: function() {
+      let flag = false;
+      let defaultList = this.data.defaultList.filter((item) => {
+        return item.checked;
+      })
+      defaultList = getValueListFromArray(defaultList, 'id');
+      let modifyList = this.data.studentsList.filter((item) => {
+        return item.checked;
+      })
+      modifyList = getValueListFromArray(modifyList, 'id');
+      if (defaultList.length != modifyList.length) {
+        flag = true;
+        return flag;
+      }
+      for (let i = 0; i < defaultList.length; i++) {
+        if (modifyList.indexOf(defaultList[i]) < 0) {
+          flag = true;
+          return flag;
+        }
+      }
+      return flag;    
+    },
     backIndex: function(e) {
-      this.triggerEvent('backEvent', {showNames: false, reload: false});
+      if (this.data.overTime || !this.isModify()) {
+        this.triggerEvent('backEvent', { showNames: false, reload: false });
+      }else {
+        wx.showModal({
+          title: '您确认要返回吗？',
+          content: '点名记录将丢失！',
+          confirmColor: '#5997FA',
+          cancelColor: '#5997FA',
+          success: (b) => {
+            if (b.confirm) {
+              this.triggerEvent('backEvent', { showNames: false, reload: false });
+            } else {
+              return false;
+            }
+          }
+        })
+      }
     }
   }
 })

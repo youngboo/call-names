@@ -3,12 +3,13 @@
     <text>{{errorMessage}}</text>
   </view>
 </view>
+
 <view class='login-container'>
   <!-- <login success="{{loginSuccess}}"></login> -->
   <!-- <image class='bg_mountain' mode="aspectFill" src='../../resources/image/bg_mountain.png'></image> -->
   <view class='login-box'>
     <view class='login-title'>
-      <text class='title-text'>登录</text>
+      <text class='title-text'>请登录</text>
     </view>
     <view class='form-box'>
       <form bindsubmit="formSubmit">
@@ -48,5 +49,15 @@
         </view>
       </form>
     </view>
+  </view>
+
+  <view class='bottom-box'>
+    <image class='bottom-image' src='../../resources/image/bg_mountain@2x.png' mode='aspectFill'></image>
+  </view>
+
+</view>
+<view class='bottom-message' wx:if='{{showBottomTips}}'>
+  <view class='warn-message'>
+    <text>{{errorMessage}}</text>
   </view>
 </view>

@@ -158,29 +158,24 @@ Page({
     })
   },
   getCourseListByTime: function(options) {
-    wx.showLoading({
-      title: '正在加载',
-    })
     getCourseList({
       startTime: patternDate(new Date(options.startTime), 'yyyy-MM-dd HH:mm:ss'),
       endTime: patternDate(new Date(options.endTime), 'yyyy-MM-dd HH:mm:ss')
     })
       .then((res) => {
-        console.log(res);
-        let list = res.data.result;
-        if (list && !!list.length && list.length > 0) {
-          //this.generatorCourseList(res.data.result);
-          this.getCourseListByWeekday(list);
-        }else {
+        if (res) {
+          let list = res.data.result;
+          if (list && !!list.length && list.length > 0) {
+            this.getCourseListByWeekday(list);
+          }  
+        }
+        else {
           this.setData({
             courseList:null
           })
         }
-        wx.hideLoading();
       })
       .catch(rej => {
-        wx.hideLoading();
-        console.log(rej)
       });
   },
  
@@ -326,6 +321,20 @@ Page({
       }
     }
     return state;
+  },
+  /**
+ * 页面相关事件处理函数--监听用户下拉动作
+ */
+  onPullDownRefresh: function () {
+    console.log('下拉了');
+    return false;
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    return false;
   },
   // getState(attendList, index) {
   //   let state = {

@@ -2,7 +2,7 @@ import { API } from '../config/ApiConfig.js'
 import { isEmpty } from '../utils/util.js'
 const login = (data) => {
     wx.showLoading({
-      title: '登陆中...',
+      title: '登录中...',
     })
     wx.removeStorageSync('userInfo');
     wx.removeStorageSync('accessInfo');

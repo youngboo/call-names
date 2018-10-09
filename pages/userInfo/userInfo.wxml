@@ -1,5 +1,6 @@
 <!--pages/userInfo/userInfo.wxml-->
 <view class='center-container'>
+
   <view class='list-box' wx:if='{{!showNames}}'>
     <view class='title-bar'>
       <view class='user-info'>
@@ -24,11 +25,16 @@
         <course-list dataSource="{{courseList}}" bind:tapEvent='onTapCourse'></course-list>
       </view>
       <view wx:else class='no-container'>
-        <image lazy-load='true' mode='center' src='../../resources/image/pic_null.png'></image>
+        <image class='no-image' lazy-load='true' mode='aspectFill' src='../../resources/image/pic_null@2x.png'></image>
       </view>
     </view>
   </view>
   <view class='names-container'>
-    <names wx:if='{{showNames}}' attendCount='{{attendCount}}' studentsList='{{studentsList}}'  bind:backEvent='onBackIndex' courseInfo='{{courseInfo}}' overTime='{{overTime}}'></names>
+    <names wx:if='{{showNames}}' attendCount='{{attendCount}}' defaultList='{{studentsList}}' studentsList='{{studentsList}}'  bind:backEvent='onBackIndex' courseInfo='{{courseInfo}}' overTime='{{overTime}}'></names>
   </view>
+
+  <view class='bottom-box'>
+    <image class='bottom-image' src='../../resources/image/bg_mountain@2x.png' mode='bottom'></image>
+  </view>
+
 </view>
