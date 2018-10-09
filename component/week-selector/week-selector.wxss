@@ -8,17 +8,18 @@
   margin-bottom: 1em;
 }
   .back-img {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
   }
   .week-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #F6FAFF;
-    border-radius: 3px;
+    background: #E7F2FF;
+    border-radius: 100%;
     text-align: center;
     font-size: 11px;
+    padding: 5px;
   }
 
  button {

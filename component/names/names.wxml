@@ -7,7 +7,7 @@
         <view class='title-top'>
           <view class='back-container'>
             <image class='back-image' mode='scaleToFill' bindtap='backIndex' src='../../resources/image/icon_back_inner@2x.png'></image>
-            <text>{{courseInfo.name}}</text>
+            <text>{{courseInfo.name}}点名</text>
           </view>
           <text>{{attendCount}}/{{studentsList.length}}</text>
         </view>

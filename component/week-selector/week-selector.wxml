@@ -2,11 +2,9 @@
 <view class='week-selector'>
   <view class='week-button back-button' bindtap='lastWeek'>
     <image class='back-img' src='../../resources/image/icon_back.png'></image>
-    <text>上一周</text>
   </view>
   <view class='title-time'><text>{{current.weekInfo.title}}</text></view>
   <view class='week-button forwrad-button' bindtap='nextWeek'>
-    <text>下一周</text>
     <image class='back-img' src='../../resources/image/icon_forward.png'></image>
   </view>
 </view>

@@ -56,9 +56,33 @@ Component({
 
     },
     submitNames: function (e) {
+      const userInfo = wx.getStorageSync('userInfo');
+      if (!userInfo) {
+        wx.redirectTo({
+          url: '/pages/login/login',
+        })
+      }
+      let confirmText ={
+        title: '您确认要提交点名结果吗？',
+        content: '提交40分钟内可修改'
+      } ;
+      const {attend} = this.properties.courseInfo;
+      if (attend && attend.creatorUserId) {
+        if (attend.creatorUserId !== userInfo.id) {
+          confirmText = {
+            title: '其他老师已点名，是否确认修改？',
+            content: ''
+          }
+        }else {
+          confirmText = {
+            title: '您确认要更新点名记录吗？',
+            content: ''
+          }
+        }
+      }
       wx.showModal({
-        title: '提交点名结果',
-        content: '提交40分钟内可修改',
+        title: confirmText.title,
+        content: confirmText.content,
         confirmColor: '#5997FA',
         cancelColor: '#5997FA',
         success: (b) => {

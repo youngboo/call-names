@@ -5,7 +5,7 @@
     "pages/userInfo/userInfo"
   ],
   "window": {
-    "navigationBarTitleText": "中育考勤",
+    "navigationBarTitleText": "中育E课堂",
     "navigationBarBackgroundColor": "#7DA6DF",
     "navigationBarTextStyle": "white"
   }

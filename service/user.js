@@ -58,7 +58,7 @@ const getUserInfo = () => {
             if (userInfo.photo) {
                 photo = userInfo.photo + '?x-oss-process=image/resize,l_32';
             } else {
-              photo = '../../resources/image/icon_teacher.png';
+              photo = '../../resources/image/icon_teacher@2x.png';
             }
             userInfo.photo = photo;
             wx.setStorageSync('userInfo', userInfo);
