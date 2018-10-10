@@ -1,8 +1,10 @@
 // pages/userInfo/userInfo.js
 import { getWeeks, patternDate, getValueListFromArray, groupByValue } from '../../utils/util.js';
-import { getUserInfo } from '../../service/user.js'
-import { getCourseList, getStudentsList } from '../../service/course.js'
-import { G_CONFIG } from '../../config/GlobalConfig.js'
+import { getUserInfo } from '../../service/user.js';
+import { getCourseList, getStudentsList } from '../../service/course.js';
+import { G_CONFIG } from '../../config/GlobalConfig.js';
+import { getServerTime } from '../../service/host.js'
+const OVER_TIME = G_CONFIG.OVER_TIME * 60 * 1000;
 Page({
   /**
    * 页面的初始数据
@@ -73,6 +75,20 @@ Page({
       showNames: e.detail.showNames
     })
   },
+  // 根据服务器时间判断时间差是否大于over值
+  isOverTime: function(time, over) {
+    return new Promise((resolve, reject) => {
+      getServerTime()
+        .then((res) => {
+          const currentTime = new Date(res.data.result);
+          let over = false;
+          if ( currentTime.getTime() - time > over) {
+            over = true;
+          }
+          resolve({over: over});
+        })
+    })
+  },
   showNames: function(detail) {
     wx.showLoading();
     const info = detail.info;
@@ -80,11 +96,7 @@ Page({
     let students = null;
     let attendCount = 0;
     let overTime = false;
-    if (attend) {
-      if (new Date().getTime() - new Date(attend.creationTime).getTime() > G_CONFIG.OVER_TIME * 60 * 1000) {
-        overTime = true;
-      }
-    } 
+    
     if (attend && attend.absentStudents.length && attend.absentStudents.length > 0) {
       students = getValueListFromArray(attend.absentStudents, 'studentId');
     }
@@ -114,13 +126,29 @@ Page({
               }
             })
           }
-          this.setData({
+          const dataObj = {
             showNames: true,
             studentsList: list,
             courseInfo: info,
-            attendCount: attendCount,
-            overTime: overTime
-          })
+            attendCount: attendCount
+          }
+          if (attend) {
+            this.isOverTime(new Date(attend.creationTime), OVER_TIME)
+            .then(res => {
+              if (res) {
+                this.setData({
+                  ...dataObj,
+                  overTime: res.over
+                })
+              }
+            })
+
+          }else {
+            this.setData({
+              ...dataObj,
+              overTime: overTime
+            })
+          } 
         } else {
           wx.showToast({
             title: '无学生',

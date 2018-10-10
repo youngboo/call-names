@@ -1,4 +1,4 @@
-import { isEmpty } from '../utils/util.js'
+import { isEmpty, request } from '../utils/util.js'
 const GATEWAY = 'http://gateway.zykj.org/api/discovery/';
 const DEFAULT = 'dev';
 /**
@@ -78,9 +78,21 @@ const getGateway = () => {
   });
 }
 const getServerTime = () => {
+  return new Promise((resolve, reject) => {
+    request({
+      action: 'getServerTime',
+      method: 'GET',
+      success: function (res) {
+        resolve(res);
+      },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  })
   
 }
 module.exports = {
   updateGateway: updateGateway,
-  getGateway: getGateway
+  getGateway: getGateway,
+  getServerTime: getServerTime
 };

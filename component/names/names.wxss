@@ -37,7 +37,8 @@
   .list-box {
     flex: 1 0 auto;
     overflow: auto;
-    height: 76vh;
+    min-height: 76vh;
+    max-height: 83vh;
     width:100%;
   }
     .names-list {
@@ -51,7 +52,7 @@
     flex: none;
     width: 100%;
     background:transparent;
-    padding-top:10px;
+    padding-top:5px;
     box-sizing:border-box;
     display: flex;
     align-items: center;
@@ -74,7 +75,7 @@
     align-items: center;
     justify-content: space-between;
     width:100%;
-    padding-bottom: 5px;
+    padding-bottom: 8px;
     box-sizing: border-box;
   }
   .warn-message {
