@@ -25,7 +25,7 @@
         <course-list dataSource="{{courseList}}" bind:tapEvent='onTapCourse'></course-list>
       </view>
       <view wx:else class='no-container'>
-        <image class='no-image' lazy-load='true' mode='aspectFill' src='../../resources/image/pic_null@2x.png'></image>
+        <image class='no-image' lazy-load='true' mode='aspectFit' src='../../resources/image/pic_null@2x.png'></image>
       </view>
     </view>
   </view>

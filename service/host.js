@@ -77,6 +77,9 @@ const getGateway = () => {
     }
   });
 }
+const getServerTime = () => {
+  
+}
 module.exports = {
   updateGateway: updateGateway,
   getGateway: getGateway

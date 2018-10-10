@@ -1,24 +1,21 @@
 import { API } from '../config/ApiConfig.js'
-import { isEmpty } from '../utils/util.js'
+import { isEmpty, request } from '../utils/util.js'
 const login = (data) => {
     wx.showLoading({
       title: '登录中...',
     })
     wx.removeStorageSync('userInfo');
     wx.removeStorageSync('accessInfo');
+
     return new Promise((resolve, reject) => {
-      wx.request({
-        url: API().login,
-        method: 'post',
+      request({
+        action: 'login',
+        method: 'POST',
         data: {
           userName: data.userName,
           password: data.password
         },
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
-        success(res) {
-          console.log(res);
+        success: function(res) {
           if (Number(res.statusCode) >= 400) {
             reject(res.data.error);
           } else if (Number(res.statusCode) === 200 || Number(res.statusCode) === 204) {
@@ -26,10 +23,39 @@ const login = (data) => {
             resolve(res);
           } 
         },
-        complete() {
+        complate: function() {
           wx.hideLoading();
-        }
+        } 
       })
+        .then((res) => {
+          wx.hideLoading();
+        })
+        .catch((e) => {
+          wx.hideLoading();
+        })
+      // wx.request({
+      //   url: API().login,
+      //   method: 'post',
+      //   data: {
+      //     userName: data.userName,
+      //     password: data.password
+      //   },
+      //   header: {
+      //     'content-type': 'application/json' // 默认值
+      //   },
+      //   success(res) {
+      //     console.log(res);
+      //     if (Number(res.statusCode) >= 400) {
+      //       reject(res.data.error);
+      //     } else if (Number(res.statusCode) === 200 || Number(res.statusCode) === 204) {
+      //       wx.setStorageSync('accessInfo', res.data.result);
+      //       resolve(res);
+      //     } 
+      //   },
+      //   complete() {
+      //     wx.hideLoading();
+      //   }
+      // })
     });  
   }
   /**
@@ -43,14 +69,11 @@ const getUserInfo = () => {
       if (null !== userInfo && !isEmpty(userInfo)) {
         resolve(userInfo);
       }else {
-        wx.request({
-          url: API().userInfo,
-          method: 'get',
+        request({
+          needAccessToken: true,
+          action: 'userInfo',
+          method: 'GET',
           data: {},
-          header: {
-            'content-type': 'application/json', // 默认值
-            'Authorization': 'Bearer ' + accessInfo.accessToken
-          },
           success: (res) => {
             console.log(res);
             const userInfo = res.data.result;
@@ -62,7 +85,7 @@ const getUserInfo = () => {
             }
             userInfo.photo = photo;
             wx.setStorageSync('userInfo', userInfo);
-            resolve(res.data.result);
+            resolve(res.data.result);   
           }
         })
       }

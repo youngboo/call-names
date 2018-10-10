@@ -1,4 +1,4 @@
-import { API } from '../config/ApiConfig.js';
+import { request } from '../utils/util.js';
 /**
  * 根据条件查询所有课程的考勤记录
  */
@@ -6,21 +6,14 @@ const getCourseList = (data) => {
   wx.showLoading({
     title: '正在加载',
   })
-  const accessInfo = wx.getStorageSync("accessInfo");
   return new Promise((resolve, reject) => {
-    wx.request({
-      url: API().courses,
-      method: 'post',
+    request({
+      needAccessToken: true,
+      action:'courses',
+      method: 'POST',
       data: data,
-      header: {
-        'content-type': 'application/json', // 默认值
-        'Authorization': 'Bearer ' + accessInfo.accessToken
-      },
       success: (res) => {
         resolve(res);
-      },
-      fail: () => {
-        reject('请求失败');
       },
       complete: () => {
         wx.hideLoading();
@@ -29,20 +22,16 @@ const getCourseList = (data) => {
   });
 }
 const getStudentsList = (data) => {
-  const accessInfo = wx.getStorageSync("accessInfo");
   data = {
     maxResultCount: 1000,
     ...data
   }
   return new Promise((resolve, reject) => {
-    wx.request({
-      url: API().studentList,
-      method: 'get',
+    request({
+      needAccessToken: true,
+      action: 'studentList',
+      method: 'GET',
       data: data,
-      header: {
-        'content-type': 'application/json', // 默认值
-        'Authorization': 'Bearer ' + accessInfo.accessToken
-      },
       success: (res) => {
         resolve(res.data.result);
       }
@@ -50,23 +39,14 @@ const getStudentsList = (data) => {
   });
 }
 const updateAttendance = (data) => {
-  const accessInfo = wx.getStorageSync("accessInfo");
   return new Promise((resolve, reject) => {
-    wx.request({
-      url: API().updateAttendance,
-      method: 'post',
+    request({
+      needAccessToken: true,
+      action: 'updateAttendance',
+      method: 'POST',
       data: data,
-      header: {
-        'content-type': 'application/json', // 默认值
-        'Authorization': 'Bearer ' + accessInfo.accessToken
-      },
       success: (res) => {
         resolve(res);
-        // if (!res.success) {
-        //   reject(res.error.message);
-        // }else {
-          
-        // }
       }
     })
   });

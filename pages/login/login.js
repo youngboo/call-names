@@ -2,6 +2,7 @@
 import {login} from '../../service/user.js';
 import { isStringEmpty } from '../../utils/util.js';
 import { updateGateway } from '../../service/host.js';
+import { G_CONFIG } from '../../config/GlobalConfig.js';
 Page({
   /**
    * 页面的初始数据
@@ -94,9 +95,14 @@ Page({
     if (!this.validateForm(value)) {
       return false;
     }
+    if (G_CONFIG.MODE === 'dev') {
+      console.log('开发环境');
+    }
+    if (G_CONFIG.MODE === 'test') {
+      wx.setStorageSync('env', value.school);
+    }
     updateGateway(value.school)
       .then((res) => {
-
         this.login(value);
       })
       .catch(e => {

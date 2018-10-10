@@ -1,3 +1,5 @@
+import { G_CONFIG } from '../config/GlobalConfig.js';
+import { getApiByMode } from '../config/ApiConfig.js';
 import WeekObj from './week.js'
 const MINIMUM_DATE = new Date('2018/9/1').getTime();
 const ONE_YEAR = 31536000000;
@@ -222,6 +224,64 @@ const showWarningMsg = (msg, time, callBack) => {
 
   }, time)
 }
+const request = (options) => {
+  return new Promise((resolve, reject) => {
+
+    const mode = G_CONFIG.MODE;
+    const url = getApiByMode(mode)[options.action];
+    let header = {
+      'content-type': 'application/json', // 默认值
+    };
+    
+    switch(mode) {
+      case "dev":
+        header = {
+          'content-type': 'application/json', // 默认值
+        };
+      break;
+      case "test":
+        const env = wx.getStorageSync('env')
+        header = {
+          'content-type': 'application/json', // 默认值
+          'School-Code' : env
+        }
+    }
+
+    if (options.needAccessToken) {
+      const accessInfo = wx.getStorageSync("accessInfo");
+      header = {
+        ...header,
+        'Authorization': 'Bearer ' + accessInfo.accessToken
+      }
+    }
+
+    wx.request({
+      url: url,
+      method: options.method,
+      data: options.data,
+      header: header,
+      success: (res) => {
+        if (options.success) {
+          options.success(res);
+        }
+        resolve(res);
+      },
+      fail: () => {
+        if (options.fail) {
+          options.fail();
+        }
+        reject('请求失败');
+      },
+      complete: () => {
+        if (options.complete) {
+          options.complete();
+        }
+        console.log(`网络请求${options.action}完成`)
+      }
+    })
+
+  });
+}
 
 module.exports = {
   formatTime: formatTime,
@@ -231,6 +291,6 @@ module.exports = {
   patternDate: patternDate,
   groupByValue: groupByValue,
   isStringEmpty: isStringEmpty,
-  getValueListFromArray,
-  getValueListFromArray
+  getValueListFromArray: getValueListFromArray,
+  request: request
 }
