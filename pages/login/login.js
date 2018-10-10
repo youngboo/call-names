@@ -21,7 +21,6 @@ Page({
   onLoad: function (options) {
   },
   validateRequire: function(e) {
-    console.log('验证', e);
     const id = e.currentTarget.id;
     let str = e.detail.value;
     const flag = !str.trim().length;
@@ -90,13 +89,11 @@ Page({
     }
   },
   formSubmit: function(e) {
-    console.log('form发生了submit事件，携带数据为：', e);
     const value = e.detail.value;
     if (!this.validateForm(value)) {
       return false;
     }
     if (G_CONFIG.MODE === 'dev') {
-     // console.log('开发环境');
       updateGateway(value.school)
         .then((res) => {
           this.login(value);
@@ -125,7 +122,6 @@ Page({
       } else {
         this.showWarningMsg(res.data.error.message);
       }
-      console.log('登陆', res);
     })
       .catch(error => {
         let title = '登陆失败,请检查网络';
@@ -151,7 +147,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log("展示了登陆页面")
   },
 
   /**

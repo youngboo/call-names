@@ -42,7 +42,6 @@ Page({
       })
   },
   tapName: function(e) {
-    console.log('点名了', e);
     const index = e.currentTarget.dataset.index;
     let checked = this.data.studentsList[index].checked;
     this.data.studentsList[index].checked = !checked;

@@ -276,7 +276,7 @@ const request = (options) => {
         if (options.complete) {
           options.complete();
         }
-        console.log(`网络请求${options.action}完成`)
+        // console.log(`网络请求${options.action}完成`)
       }
     })
 

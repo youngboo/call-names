@@ -7,7 +7,8 @@
   justify-content: center;
   width: 90vw;
   border-radius: 8px;
-  margin: 10px;
+  margin-top: 20rpx;
+  height: 97%;
 }
 .top-box {
   background: #FFFFFF;
@@ -17,11 +18,10 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: auto;
+  height: 90%;
   border-radius: 8px;
-  margin-bottom: 10px;
   box-shadow: 0 2px 4px 0 rgba(0,88,189,0.46);
-  flex: 1 0 100%;
+  flex: 1 0 auto;
 }
   .title-box {
     width: 90%;
@@ -34,7 +34,7 @@
     flex: none;
   }
   .list-box {
-    flex: 1 0 auto;
+    flex: 0 1 auto;
     overflow: auto;
     min-height: 76vh;
     max-height: 84vh;
@@ -51,7 +51,7 @@
     flex: none;
     width: 100%;
     background:transparent;
-    padding-top:5px;
+    padding-top:32rpx;
     box-sizing:border-box;
     display: flex;
     align-items: center;
@@ -94,6 +94,8 @@
   display: inline-flex;
   flex-wrap: nowrap;
   font-weight: 600;
+  line-height:32px;
+  align-items:center;
 }
   .back-image {
     width: 16px;

@@ -3,7 +3,6 @@ App({
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
   onLaunch: function () {
-    console.log('初始化小程序');
     // const userInfo = wx.getStorageSync('accessInfo');
     // console.log('userInfo', userInfo);
     // if (userInfo === null || isEmpty(userInfo)) {

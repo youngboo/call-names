@@ -66,22 +66,30 @@ Component({
           url: '/pages/login/login',
         })
       }
+      
       let confirmText ={
         title: '您确认要提交吗？',
         content: '提交后40分钟内可修改'
       } ;
       const {attend} = this.properties.courseInfo;
       if (attend) {
-        const modifyUserId = this.getModifyUserId(attend);
-        if (modifyUserId !== userInfo.id) {
+        if (!this.isModify()) {
           confirmText = {
-            title: '其他老师已点名！',
-            content: '是否确认修改?'
+            title: '还没有做任何修改',
+            content: '确认要提交吗?'
           }
         }else {
-          confirmText = {
-            title: '您确认要更新吗？',
-            content: ''
+          const modifyUserId = this.getModifyUserId(attend);
+          if (modifyUserId !== userInfo.id) {
+            confirmText = {
+              title: '其他老师已点名！',
+              content: '是否确认修改?'
+            }
+          }else {
+            confirmText = {
+              title: '您确认要更新吗？',
+              content: ''
+            }
           }
         }
       }
@@ -92,7 +100,11 @@ Component({
         cancelColor: '#5997FA',
         success: (b) => {
           if (b.confirm) {
-            this.submit();
+              if (attend && !this.isModify()) {
+                this.triggerEvent('backEvent', { showNames: false, reload: false });
+                return;
+              }
+               this.submit();
           }else {
             return false;
           }

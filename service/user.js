@@ -65,7 +65,6 @@ const getUserInfo = () => {
     const accessInfo = wx.getStorageSync("accessInfo");
     return new Promise((resolve, reject) => {
       const userInfo = wx.getStorageSync('userInfo');
-      console.log(userInfo);
       if (null !== userInfo && !isEmpty(userInfo)) {
         resolve(userInfo);
       }else {
@@ -75,7 +74,6 @@ const getUserInfo = () => {
           method: 'GET',
           data: {},
           success: (res) => {
-            console.log(res);
             const userInfo = res.data.result;
             let photo = null;
             if (userInfo.photo) {

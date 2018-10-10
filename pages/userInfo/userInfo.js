@@ -22,7 +22,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('userInfo页面load了');
     if(this.data.currentWeek === null) {
       this.initWeeks();
     }
@@ -63,11 +62,9 @@ Page({
     })
   },
   onTapCourse: function(e) {
-    console.log(e, '点击课程');
     this.showNames(e.detail);
   },
   onBackIndex: function(e) {
-    console.log(e);
     if (e.detail.reload) {
       this.reloadCourseList();
     }
@@ -80,12 +77,12 @@ Page({
     return new Promise((resolve, reject) => {
       getServerTime()
         .then((res) => {
-          const currentTime = new Date(res.data.result);
-          let over = false;
-          if ( currentTime.getTime() - time > over) {
-            over = true;
+          const currentTime = new Date(res.data.result.replace(/-/g, "/")).getTime();
+          let isOver = false;
+          if ( currentTime - time > over) {
+            isOver = true;
           }
-          resolve({over: over});
+          resolve({over: isOver});
         })
     })
   },
@@ -133,7 +130,7 @@ Page({
             attendCount: attendCount
           }
           if (attend) {
-            this.isOverTime(new Date(attend.creationTime), OVER_TIME)
+            this.isOverTime(new Date(attend.creationTime.replace(/-/g, "/")).getTime(), OVER_TIME)
             .then(res => {
               if (res) {
                 this.setData({
@@ -160,7 +157,6 @@ Page({
       .catch(rej => wx.hideLoading());
   },
   onChangeWeek: function (e){
-    // console.log("切换周", e.detail);
     let index = Number(this.data.weekIndex) + Number(e.detail.option);
     if (index < 0) {
       index = 0
@@ -254,54 +250,8 @@ Page({
     this.setData({
       courseList: weekdayList
     })
-   // console.log('weekdaylist', weekdayList);
   },
-  // generatorCourseList: function(list) {
-  //   let allList = [];
-  //   const length = this.data.currentWeek.weekInfo.weeks.length;
-  //   list.forEach((item) => {
-  //     const courselist = item.courseSchedules;
-  //     const weekIndex = Number(item.courseSchedules[0].schedule.weekday) - 1;
-  //     const attendList = item.attendanceRecordList;
-  //     this.getCourseAttendInfo(courselist, attendList);
-  //     allList.push({
-  //       time: patternDate(new Date(this.data.currentWeek.weekInfo.weeks[weekIndex]),"yyyy-MM-dd EEE"),
-  //         content: item.content,
-  //         courseList: item.courseSchedules.map((course, courseIndex) => {
-  //           return {
-  //             name: item.name,
-  //             content: `第${course.schedule.index}节`,
-  //             state: this.getState(attendList, courseIndex),
-  //             id: course.courseId,
-  //             stuIds: this.getIdList(attendList, courseIndex),
-  //           }
-  //         })
-  //       })
-  //   });
-  //   this.setData({
-  //     courseList: allList
-  //   })
-  //   // console.log(courseList);
-  // },
-  //处理课位和考勤信息，如果是两节联排则合到一起，再把考勤信息加入 
-  // getCourseAttendInfo(courseList, attendList) {
-  //   // 以下两步根据课程整合课位
-  //   const newCourseList = groupByValue(courseList, 'courseId');
-  //   const newAttendList = groupByValue(attendList, 'courseId');
-  //   newCourseList.map((item) => {
-  //     //item.valueList.sort
-  //     //如果有考勤记录就整合，没有就忽略，认为未点名
-  //     return {
-  //       id: item.id,
-  //       name: item.name,
-  //       content: this.getScheduleText(),
-  //       state: this.getState(),
-  //       attendId:0
-  //     }
 
-  //   })
-  //   console.log(newCourseList);
-  // },
   getScheduleText(scheduleList) {
     scheduleList.sort((a, b)=>{
       if (a.schedule.index > b.schedule.index) {
@@ -354,7 +304,6 @@ Page({
  * 页面相关事件处理函数--监听用户下拉动作
  */
   onPullDownRefresh: function () {
-    console.log('下拉了');
     return false;
   },
 

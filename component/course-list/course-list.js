@@ -64,7 +64,6 @@ Component({
    */
   methods: {
     handleTapCourse: function (e) {
-      console.log('点击了课程列表', e);
       var myEventDetail = {
         id: e.currentTarget.id,
         info: {
