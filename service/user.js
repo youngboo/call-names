@@ -8,7 +8,7 @@ const login = (data) => {
     wx.removeStorageSync('accessInfo');
     return new Promise((resolve, reject) => {
       wx.request({
-        url: API.login,
+        url: API().login,
         method: 'post',
         data: {
           userName: data.userName,
@@ -44,7 +44,7 @@ const getUserInfo = () => {
         resolve(userInfo);
       }else {
         wx.request({
-          url: API.userInfo,
+          url: API().userInfo,
           method: 'get',
           data: {},
           header: {

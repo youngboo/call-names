@@ -16,13 +16,15 @@
           <view class='course-item' bindtap='handleTapCourse' id='{{info.id}}' data-attend='{{info.attend}}' data-date='{{item.date}}' data-name='{{info.name}}'>
             <view class='info-box'>
               <text>{{info.name}}</text>
-              <text>{{info.content}}</text>
+              <view class='content-box'>
+                <text>{{info.content}}</text>
+                <view class='attend-text' wx:if='{{info.attend}}'>
+                  <text>{{info.attend.creationTime}}</text>
+                </view>
+              </view>
             </view>
             <view class='state-box {{info.state.color}}'>
               <text>{{info.state.text}}</text>
-              <view class='attend-text' wx:if='{{info.attend}}'>
-                <text>{{info.attend.creationTime}}</text>
-              </view>
             </view>
           </view>
         </block>

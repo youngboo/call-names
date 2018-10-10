@@ -9,7 +9,7 @@ const getCourseList = (data) => {
   const accessInfo = wx.getStorageSync("accessInfo");
   return new Promise((resolve, reject) => {
     wx.request({
-      url: API.courses,
+      url: API().courses,
       method: 'post',
       data: data,
       header: {
@@ -36,7 +36,7 @@ const getStudentsList = (data) => {
   }
   return new Promise((resolve, reject) => {
     wx.request({
-      url: API.studentList,
+      url: API().studentList,
       method: 'get',
       data: data,
       header: {
@@ -53,7 +53,7 @@ const updateAttendance = (data) => {
   const accessInfo = wx.getStorageSync("accessInfo");
   return new Promise((resolve, reject) => {
     wx.request({
-      url: API.updateAttendance,
+      url: API().updateAttendance,
       method: 'post',
       data: data,
       header: {

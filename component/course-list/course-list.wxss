@@ -96,8 +96,17 @@
     align-items:flex-end;
   }
     .attend-text {
-      font-size: 9px;
+      font-family: PingFangSC-Regular;
+      font-size: 10px;
+      color: #666666;
+      letter-spacing: 0.01px;
+      text-align: center;
+      margin-left: 9px;
     }
+  .content-box {
+    display:flex;
+    align-items:baseline;
+  }
 
 
 /*章节部分*/

@@ -26,9 +26,8 @@
   .back-button .back-img{
     margin-right: 5px;
   }
-  .forward-button .back-img{
-    margin-left: 5px;
-  }
+  /* .forward-button .back-img{
+  } */
 
  button {
    font-size: 9pt;

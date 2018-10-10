@@ -1,6 +1,7 @@
 // pages/login/login.js
 import {login} from '../../service/user.js';
 import { isStringEmpty } from '../../utils/util.js';
+import { updateGateway } from '../../service/host.js';
 Page({
   /**
    * 页面的初始数据
@@ -59,7 +60,7 @@ Page({
         showBottomTips: false,
         errorMessage: null
       });
-    }, 3000);
+    }, 5000);
 
   },
   validateForm: function(values) {
@@ -93,6 +94,17 @@ Page({
     if (!this.validateForm(value)) {
       return false;
     }
+    updateGateway(value.school)
+      .then((res) => {
+
+        this.login(value);
+      })
+      .catch(e => {
+        this.showWarningMsg(e);
+      })
+
+  },
+  login: function(value) {
     login({
       userName: value.userName,
       password: value.password
@@ -102,42 +114,18 @@ Page({
         wx.redirectTo({
           url: '/pages/userInfo/userInfo',
         })
-      }else {
-        // wx.showToast({
-        //   title: '登陆失败',
-        //   icon: 'none'
-        // })
+      } else {
         this.showWarningMsg(res.data.error.message);
       }
       console.log('登陆', res);
     })
-    .catch(error => {
-      wx.showToast({
-        title: '登陆失败,请检查网络',
-        icon: 'none'
+      .catch(error => {
+        wx.showToast({
+          title: '登陆失败,请检查网络',
+          icon: 'none'
+        })
+        this.showWarningMsg(error.message);
       })
-      this.showWarningMsg(error.message);
-    })
-    // wx.request({
-    //   url: 'http://172.16.168.161:8025/api/TokenAuth/Authenticate',
-    //   method: 'post',
-    //   data: ,
-    //   header: {
-    //     'content-type': 'application/json' // 默认值
-    //   },
-    //   success(res) {
-    //     if (res.data.success) {
-    //       wx.setStorageSync('accessInfo', res.data.result);
-    //       wx.showToast({
-    //         title: '登陆成功'
-    //       })
-    //       wx.redirectTo({
-    //         url: '/pages/userInfo/userInfo',
-    //       })
-    //     }
-    //     console.log('登陆',res.data.result);
-    //   }
-    // })
   },
 
   /**
