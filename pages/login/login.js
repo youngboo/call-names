@@ -96,18 +96,20 @@ Page({
       return false;
     }
     if (G_CONFIG.MODE === 'dev') {
-      console.log('开发环境');
+     // console.log('开发环境');
+      updateGateway(value.school)
+        .then((res) => {
+          this.login(value);
+        })
+        .catch(e => {
+          this.showWarningMsg(e);
+        })  
     }
-    if (G_CONFIG.MODE === 'test') {
+    else if (G_CONFIG.MODE === 'test') {
       wx.setStorageSync('env', value.school);
+      this.login(value);
     }
-    updateGateway(value.school)
-      .then((res) => {
-        this.login(value);
-      })
-      .catch(e => {
-        this.showWarningMsg(e);
-      })
+    
 
   },
   login: function(value) {
@@ -126,11 +128,15 @@ Page({
       console.log('登陆', res);
     })
       .catch(error => {
-        wx.showToast({
-          title: '登陆失败,请检查网络',
-          icon: 'none'
-        })
-        this.showWarningMsg(error.message);
+        let title = '登陆失败,请检查网络';
+        if (error.statusCode === 404) {
+            title = '学校不存在';
+        }
+        // wx.showToast({
+        //   title: title,
+        //   icon: 'none'
+        // })
+        this.showWarningMsg(title);
       })
   },
 

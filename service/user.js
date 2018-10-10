@@ -17,7 +17,7 @@ const login = (data) => {
         },
         success: function(res) {
           if (Number(res.statusCode) >= 400) {
-            reject(res.data.error);
+            reject(res);
           } else if (Number(res.statusCode) === 200 || Number(res.statusCode) === 204) {
             wx.setStorageSync('accessInfo', res.data.result);
             resolve(res);
