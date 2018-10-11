@@ -1,10 +1,10 @@
 <!--component/week-selector/week-selector.wxml-->
 <view class='week-selector'>
   <view class='week-button back-button' bindtap='lastWeek'>
-    <image class='back-img' src='../../resources/image/icon_back@2x.png'></image>
+    <image class='back-img' src='../../resources/image/icon_back_c@2x.png'></image>
   </view>
   <view class='title-time'><text>{{current.weekInfo.title}}</text></view>
   <view class='week-button forward-button' bindtap='nextWeek'>
-    <image class='back-img' src='../../resources/image/icon_forward@2x.png'></image>
+    <image class='back-img' src='../../resources/image/icon_forward_c@2x.png'></image>
   </view>
 </view>
