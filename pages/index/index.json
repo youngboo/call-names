@@ -1,7 +1,5 @@
 {
     "usingComponents": {
-      "course-list": "/component/course-list/course-list",
-      "login": "/component/login/login",
-      "user-center": "/component/user-center/user-center"
+      "course-list": "/component/course-list/course-list"
     }
 }

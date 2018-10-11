@@ -270,7 +270,7 @@ const request = (options) => {
         if (options.fail) {
           options.fail();
         }
-        reject('请求失败');
+        reject('网络错误');
       },
       complete: () => {
         if (options.complete) {

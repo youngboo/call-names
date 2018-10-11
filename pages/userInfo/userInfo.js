@@ -62,11 +62,17 @@ Page({
     })
   },
   onTapCourse: function(e) {
-    this.showNames(e.detail);
+    wx.showLoading({
+      title: '正在加载...',
+    })
+    this.reloadCourseList()
+    .then((res) => {
+      this.showNames(e.detail);
+    })
   },
   onBackIndex: function(e) {
     if (e.detail.reload) {
-      this.reloadCourseList();
+      this.reloadCourseList('show');
     }
     this.setData({
       showNames: e.detail.showNames
@@ -87,7 +93,6 @@ Page({
     })
   },
   showNames: function(detail) {
-    wx.showLoading();
     const info = detail.info;
     const attend = info.attend;
     let students = null;
@@ -175,32 +180,51 @@ Page({
     })
 
   },
-  reloadCourseList: function() {
-    this.getCourseListByTime({
-      startTime: this.data.currentWeek.weekInfo.start,
-      endTime: this.data.currentWeek.weekInfo.end
+  reloadCourseList: function(loading) {
+    if (loading === 'show') {
+      wx.showLoading({
+        title: '正在加载...',
+      })
+    }
+    return new Promise((resolve, reject) => {
+      this.getCourseListByTime({
+        startTime: this.data.currentWeek.weekInfo.start,
+        endTime: this.data.currentWeek.weekInfo.end
+      })
+      .then(res => {
+        resolve(res);
+      })
+      .catch(e => {
+        reject(e);
+      })
+
     })
   },
   getCourseListByTime: function(options) {
-    getCourseList({
-      startTime: patternDate(new Date(options.startTime), 'yyyy-MM-dd HH:mm:ss'),
-      endTime: patternDate(new Date(options.endTime), 'yyyy-MM-dd HH:mm:ss')
-    })
-      .then((res) => {
-        if (res) {
-          let list = res.data.result;
-          if (list && !!list.length && list.length > 0) {
-            this.getCourseListByWeekday(list);
-          }  
-        }
-        else {
-          this.setData({
-            courseList:null
-          })
-        }
+    return new Promise((resolve, reject) => {
+      getCourseList({
+        startTime: patternDate(new Date(options.startTime), 'yyyy-MM-dd HH:mm:ss'),
+        endTime: patternDate(new Date(options.endTime), 'yyyy-MM-dd HH:mm:ss')
       })
-      .catch(rej => {
-      });
+        .then((res) => {
+          if (res) {
+            let list = res.data.result;
+            if (list && !!list.length && list.length > 0) {
+              const weekdayList = this.getCourseListByWeekday(list);
+              resolve(weekdayList);
+            }
+          }
+          else {
+            this.setData({
+              courseList: null
+            })
+            reject();
+          }
+        })
+        .catch(rej => {
+          reject(rej);
+        });
+    })
   },
  
  /**
@@ -250,6 +274,7 @@ Page({
     this.setData({
       courseList: weekdayList
     })
+    return weekdayList;
   },
 
   getScheduleText(scheduleList) {
@@ -313,30 +338,9 @@ Page({
   onReachBottom: function () {
     return false;
   },
-  // getState(attendList, index) {
-  //   let state = {
-  //     text: '未点名',
-  //     color: 'text-third' 
-  //   };
-  //   if (attendList && attendList.length && attendList.length > 0) {
-  //     const courseInfo = attendList[index];
-  //     if (courseInfo && courseInfo.absentStudents) {
-  //       const count = courseInfo.absentStudents.length;
-  //       if (count && count > 0) {
-  //         state = {
-  //           text: `缺勤${count}人`,
-  //           color: 'text-red'
-  //         };
-  //       }else {
-  //         state = {
-  //           text: '满勤',
-  //           color: 'text-blue'
-  //         }
-  //       }
-  //     }
-  //   } 
-  //   return state;
-  // },
+  onShow: function() {
+    this.reloadCourseList('show');
+  },
   logout: function() {
     this.setData({
       userInfo: null

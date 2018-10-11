@@ -4,8 +4,7 @@
   flex-wrap: nowrap;
   align-items: center;
   background: linear-gradient(to bottom, #7da6df, #c9ddf7);
-  min-height: 100vh;
-  height: auto;
+  height: 100vh;
   width: 100%;
   flex-direction: column;
 }
@@ -27,7 +26,7 @@
   display:flex;
   width:90%;
   min-height: 95vh;
-  height: auto;
+  max-height: 95vh;
   background: #fff;
   flex-direction:column;
   border-radius:8px;

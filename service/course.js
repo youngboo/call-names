@@ -3,9 +3,6 @@ import { request } from '../utils/util.js';
  * 根据条件查询所有课程的考勤记录
  */
 const getCourseList = (data) => {
-  wx.showLoading({
-    title: '正在加载',
-  })
   return new Promise((resolve, reject) => {
     request({
       needAccessToken: true,

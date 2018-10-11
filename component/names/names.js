@@ -1,6 +1,8 @@
 // component/names/names.js
-import { getValueListFromArray, patternDate } from '../../utils/util.js'
-import { updateAttendance } from '../../service/course.js'
+import { getValueListFromArray, patternDate } from '../../utils/util.js';
+import { updateAttendance } from '../../service/course.js';
+import { G_CONFIG } from '../../config/GlobalConfig.js';
+const OVER_TIME = G_CONFIG.OVER_TIME;
 Component({
   /**
    * 组件的属性列表
@@ -19,7 +21,7 @@ Component({
   data: {
     attendCount: 0,
     showTopTips: false,
-    errorMessage: '点名已超过40分钟，无法再修改！',
+    errorMessage: `点名已超过${OVER_TIME}分钟，无法再修改！`,
     modify: false
   },
 
@@ -69,27 +71,20 @@ Component({
       
       let confirmText ={
         title: '您确认要提交吗？',
-        content: '提交后40分钟内可修改'
+        content: `提交后${OVER_TIME}分钟内可修改`
       } ;
       const {attend} = this.properties.courseInfo;
       if (attend) {
-        if (!this.isModify()) {
+        const modifyUserId = this.getModifyUserId(attend);
+        if (modifyUserId !== userInfo.id) {
           confirmText = {
-            title: '还没有做任何修改',
-            content: '确认要提交吗?'
+            title: '其他老师已点名！',
+            content: '是否确认修改?'
           }
-        }else {
-          const modifyUserId = this.getModifyUserId(attend);
-          if (modifyUserId !== userInfo.id) {
-            confirmText = {
-              title: '其他老师已点名！',
-              content: '是否确认修改?'
-            }
-          }else {
-            confirmText = {
-              title: '您确认要更新吗？',
-              content: ''
-            }
+        } else {
+          confirmText = {
+            title: '您确认要更新吗？',
+            content: ''
           }
         }
       }
@@ -128,6 +123,7 @@ Component({
       const courseId = this.properties.courseInfo.courseId;
       const idList = getValueListFromArray(submitList, 'id');
       const self = this;
+      console.log('提交日期', courseDate);
       updateAttendance({
         courseId: courseId,
         studentIdList: idList,
