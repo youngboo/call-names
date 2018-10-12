@@ -17,8 +17,8 @@
     <view class='divider-box'>
       <view class='divider'/>
     </view>
-    <view>
-      <week-selector bind:changeWeek='onChangeWeek' current="{{currentWeek}}"></week-selector>
+    <view class='week-box'>
+      <week-selector bind:changeWeek='onChangeWeek' current="{{currentWeek}}" style='width: 100%'></week-selector>
     </view>
     <view class='list-container'>
       <view wx:if='{{courseList}}'>

@@ -48,8 +48,22 @@ const updateAttendance = (data) => {
     })
   });
 }
+const getAttendanceRecordByCourse = (data) => {
+  return new Promise((resolve, reject) => {
+    request({
+      needAccessToken: true,
+      action: 'getAttendanceRecordByCourse',
+      method: 'GET',
+      data: data,
+      success: (res) => {
+        resolve(res);
+      }
+    })
+  });
+}
 module.exports = {
   getCourseList: getCourseList,
   getStudentsList: getStudentsList,
-  updateAttendance: updateAttendance
+  updateAttendance: updateAttendance,
+  getAttendanceRecordByCourse: getAttendanceRecordByCourse
 };

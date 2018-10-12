@@ -20,6 +20,7 @@ export const getApiByMode = (mode) => {
     studentList: `${prefix}/services/app/Course/GetSubscribeAsync`,
     updateAttendance: `${prefix}/services/app/Attendance/CreateOrUpdateAttendanceRecordAsync`,
     getServerTime: `${prefix}/services/app/Util/GetCurrentTime`,
+    getAttendanceRecordByCourse: `${prefix}/services/app/Attendance/GetAttendanceRecordByCourse`    
 
   }
   wx.setStorageSync('API', API);

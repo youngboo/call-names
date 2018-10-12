@@ -62,7 +62,6 @@ const login = (data) => {
    * 从缓存或网络异步获取用户信息
    */
 const getUserInfo = () => {
-    const accessInfo = wx.getStorageSync("accessInfo");
     return new Promise((resolve, reject) => {
       const userInfo = wx.getStorageSync('userInfo');
       if (null !== userInfo && !isEmpty(userInfo)) {

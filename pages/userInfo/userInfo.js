@@ -1,7 +1,7 @@
 // pages/userInfo/userInfo.js
 import { getWeeks, patternDate, getValueListFromArray, groupByValue } from '../../utils/util.js';
 import { getUserInfo } from '../../service/user.js';
-import { getCourseList, getStudentsList } from '../../service/course.js';
+import { getCourseList, getStudentsList, getAttendanceRecordByCourse } from '../../service/course.js';
 import { G_CONFIG } from '../../config/GlobalConfig.js';
 import { getServerTime } from '../../service/host.js'
 const OVER_TIME = G_CONFIG.OVER_TIME * 60 * 1000;
@@ -61,16 +61,54 @@ Page({
       weekIndex: currentIndex 
     })
   },
+  /**
+   * 更新制定课程的缺勤信息
+   */
+  updateCourseAttend: function (courseId, absentList) {
+    const currentDate = this.data.currentWeek
+    let copyCourseList = Object.assign({}, this.data.courseList);
+    let currentCourseList = copyCourseList[0].courseList;
+    for (let i = 0; i < currentCourseList.length; i++) {
+      let item = currentCourseList[i];
+      if (item.id === Number(courseId)) {
+          item.attend.absentStudentCount = absentList.length,
+          item.attend.absentStudents = absentList;
+          break;
+      }
+    }
+    console.log(currentCourseList, copyCourseList);
+    this.setData({
+      courseList: copyCourseList
+    })
+  },
   onTapCourse: function(e) {
     wx.showLoading({
       title: '正在加载...',
     })
-    this.reloadCourseList()
-    .then((res) => {
-      this.showNames(e.detail);
+    const courseInfo = e.detail.info
+    const id = courseInfo.courseId;
+    getAttendanceRecordByCourse({
+      courseId: id,
+      courseDate: patternDate(new Date(courseInfo.date), 'yyyy-MM-dd HH:mm:ss')
     })
+      .then((res) => {
+        console.log(res);
+        if (res.data && !!res.data.result) {
+          const attend = res.data.result;
+          e.detail.info.attend = attend;
+          // this.updateCourseAttend(id, absentList);
+        }
+        this.showNames(e.detail);
+      })
+    // const attend = e.detail.info.attend;
+    // if (attend) {
+
+    // } else {
+    //   this.showNames(e.detail);
+    // }
   },
   onBackIndex: function(e) {
+    //TODO 传回缺勤列表，只更新此课程即可，减少网络请求次数
     if (e.detail.reload) {
       this.reloadCourseList('show');
     }
@@ -311,9 +349,9 @@ Page({
       color: 'text-third'
     };
     if (attend) {
-      if (attend.absentStudents && attend.absentStudents.length > 0) {
+      if (attend.absentStudentsCount && attend.absentStudentsCount > 0) {
         state = {
-          text: `缺勤${attend.absentStudents.length}人`,
+          text: `缺勤${attend.absentStudentsCount}人`,
           color: 'text-red'
         };
       } else { 
@@ -339,6 +377,7 @@ Page({
     return false;
   },
   onShow: function() {
+    console.log('后台切到前台了');
     this.reloadCourseList('show');
   },
   logout: function() {

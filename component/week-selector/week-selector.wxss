@@ -1,11 +1,14 @@
 /* component/week-selector/week-selector.wxss */
+
 .week-selector {
   display: flex;
   font-size: 9px;
   margin-top: 1em;
   align-items:center;
-  justify-content:space-around;
+  justify-content:space-between;
   margin-bottom: 1em;
+  width:100%;
+  flex:1 0 100%;
 }
   .back-img {
     width: 100%;

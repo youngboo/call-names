@@ -96,7 +96,7 @@ Component({
         success: (b) => {
           if (b.confirm) {
               if (attend && !this.isModify()) {
-                this.triggerEvent('backEvent', { showNames: false, reload: false });
+                this.triggerEvent('backEvent', { showNames: false, reload: true });
                 return;
               }
                this.submit();
@@ -170,7 +170,7 @@ Component({
     },
     backIndex: function(e) {
       if (this.data.overTime || !this.isModify()) {
-        this.triggerEvent('backEvent', { showNames: false, reload: false });
+        this.triggerEvent('backEvent', { showNames: false, reload: true });
       }else {
         wx.showModal({
           title: '您确认要返回吗？',
@@ -179,7 +179,7 @@ Component({
           cancelColor: '#5997FA',
           success: (b) => {
             if (b.confirm) {
-              this.triggerEvent('backEvent', { showNames: false, reload: false });
+              this.triggerEvent('backEvent', { showNames: false, reload: true });
             } else {
               return false;
             }
