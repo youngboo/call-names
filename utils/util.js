@@ -270,12 +270,19 @@ const request = (options) => {
         if (options.fail) {
           options.fail();
         }
+        if (options.errorMsg) {
+          wx.showToast({
+            title: options.errorMsg,
+          })
+        }
+        wx.hideLoading();
         reject('网络错误');
       },
       complete: () => {
         if (options.complete) {
           options.complete();
         }
+        wx.hideLoading();
         // console.log(`网络请求${options.action}完成`)
       }
     })

@@ -76,7 +76,6 @@ Page({
           break;
       }
     }
-    console.log(currentCourseList, copyCourseList);
     this.setData({
       courseList: copyCourseList
     })
@@ -92,14 +91,16 @@ Page({
       courseDate: patternDate(new Date(courseInfo.date), 'yyyy-MM-dd HH:mm:ss')
     })
       .then((res) => {
-        console.log(res);
-        if (res.data && !!res.data.result) {
+        if (res && res.data && !!res.data.result) {
           const attend = res.data.result;
           e.detail.info.attend = attend;
           // this.updateCourseAttend(id, absentList);
         }
         this.showNames(e.detail);
       })
+      .catch((rej => wx.showToast({
+        title: rej,
+      })))
     // const attend = e.detail.info.attend;
     // if (attend) {
 
@@ -377,7 +378,7 @@ Page({
     return false;
   },
   onShow: function() {
-    console.log('后台切到前台了');
+    // console.log('后台切到前台了');
     this.reloadCourseList('show');
   },
   logout: function() {

@@ -48,6 +48,7 @@
   width: 80vw;
   border-radius: 10px;
   min-height: auto;
+  margin-bottom: 15vh;
 }
 .form-box {
   width:90%;
