@@ -18,7 +18,20 @@
             <view class='image-box'>
               <image class='input-icon' mode='bottom' src='../../resources/image/icon_school.png'></image>
             </view>
-            <input class='form-input' confirm-type='next' bindblur='validateRequire' bindinput='validateRequire' id='school' type='text' name="school" placeholder="请输入学校名" />
+            <input 
+              class='form-input' 
+              confirm-type='next' 
+              bindfocus='handleFocus'
+              bindblur='validateRequire' 
+              bindinput='validateRequire' 
+              id='school' 
+              type='text' 
+              name="school" 
+              placeholder="请输入学校名" 
+              bindconfirm='nextInput'
+              focus='{{focus==="school" ? true: false}}'
+              style="font-family: 'Microsoft YaHei'"
+            />
             <view class='icon-box'>
               <icon type='warn' color='#E64340' size='23' wx:if='{{schoolRequire}}'></icon>
             </view>
@@ -27,7 +40,22 @@
             <view class='image-box'>
               <image class='input-icon' mode='center' src='../../resources/image/icon_user.png'></image>
             </view>
-            <input  class='form-input' confirm-type='next' bindblur='validateRequire' bindinput='validateRequire' id='user' type='text' name="userName" placeholder="请输入账号" />
+            <input
+              class='form-input' 
+              confirm-type='next' 
+              bindfocus='handleFocus'
+              bindblur='handleBlur' 
+              bindinput='handleInput' 
+              id='user' 
+              type='text' 
+              name="userName" 
+              placeholder="请输入账号"
+              bindconfirm='nextInput'
+              focus='{{focus==="user" ? true: false}}'
+              selection-start="{{ cursorIndex }}"
+              selection-end="{{ cursorIndex }}" 
+              cursor="{{ cursorIndex }}"
+            />
             <view class='icon-box'>
               <icon type='warn' color='#E64340' size='23' wx:if='{{userRequire}}'></icon>
             </view>
@@ -36,7 +64,20 @@
             <view class='image-box'>
               <image class='input-icon' mode='bottom' src='../../resources/image/icon_lock.png'></image>
             </view>
-            <input  class='form-input' confirm-type='done' bindblur='validateRequire' bindinput='validateRequire' id='password' name="password" type='password' placeholder="请输入密码" />
+            <input 
+              class='form-input' 
+              confirm-type='done'
+              cursor-spacing='60'
+              bindblur='validateRequire' 
+              bindinput='validateRequire' 
+              id='password' 
+              name="password" 
+              type='text' 
+              password='true'
+              placeholder="请输入密码"
+              bindconfirm='nextInput'
+              focus='{{focus==="password" ? true: false}}' 
+            />
             <view class='icon-box'>
               <icon type='warn' color='#E64340' size='23' wx:if='{{passwordRequire}}'></icon>
             </view>

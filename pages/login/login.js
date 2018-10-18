@@ -12,7 +12,10 @@ Page({
     userRequire: false,
     passwordRequire: false,
     showBottomTips: false,
-    errorMessage: null
+    errorMessage: null,
+    focus: null,
+    confirmHold: true,
+    cursorIndex: -1
   },
 
   /**
@@ -44,10 +47,38 @@ Page({
     }
     return str;
   },
+  handleFocus: function (e) {
+    const {id} = e.target;
+    this.setData({
+      focus: id
+    })
+    console.log(id);
+  },
   handleInput: function (e) {
-    const id = e.currentTarget.id;
-    let str = e.detail.value;
-    this.validateRequire();
+    return this.validateRequire(e);
+  },
+  handleBlur: function (e) {
+    this.validateRequire(e);
+  },
+  nextInput: function (e) {
+    const id = e.target.id;
+    let focus;
+    switch (id) {
+      case 'school':
+        focus = 'user';
+      break;
+      case 'user':
+        focus = 'password';
+      break;
+      case 'password':
+        focus = '';
+      break;
+      default:
+      break;
+    }
+    this.setData({
+      focus: focus
+    })
   },
   showWarningMsg: function (msg) {
     this.setData({

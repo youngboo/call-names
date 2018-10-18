@@ -6,7 +6,12 @@ Page({
    * 页面的初始数据
    */
   data: {
- 
+    inputStyle: {
+      'confirm-hold': true,
+      'confirm-type': 'next',
+      'cursor-spacing': '20px',
+      
+    }
   },
 
   /**

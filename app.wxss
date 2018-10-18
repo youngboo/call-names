@@ -1,12 +1,22 @@
 view {
   font-size: 14px;
   color: #333333;
+  font-family: "Microsoft YaHei"
 }
 text {
-  font-family:PingFangSC-Regular, "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "Microsoft YaHei";
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+input {
+  font-family: "Microsoft YaHei"
+}
+input::before {
+  font-family: "Microsoft YaHei"
+}
+input::after {
+  font-family: "Microsoft YaHei"
 }
 .text-main {
   color: #333333;

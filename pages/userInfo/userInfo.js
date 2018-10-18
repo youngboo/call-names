@@ -385,8 +385,7 @@ Page({
     this.setData({
       userInfo: null
     })
-    wx.removeStorageSync('accessInfo');
-    wx.removeStorageSync('userInfo');
+    wx.clearStorageSync();
     wx.redirectTo({
       url: '/pages/index/index',
     })

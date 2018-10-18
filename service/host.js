@@ -20,7 +20,7 @@ const updateGateway = (value) => {
             return;
           }else {
             wx.setStorageSync('gateway', res.data);
-            updateApi(res.data.server);
+            //updateApi(res.data.server);
             resolve(res.data);
           }
         } else {
@@ -33,17 +33,17 @@ const updateGateway = (value) => {
     })
   });
 }
-const updateApi = (server) => {
-  const prefix = server + '/api';
-  const API = {
-    login: `${prefix}/TokenAuth/Authenticate`,
-    userInfo: `${prefix}/services/app/User/GetInfoAsync`,
-    courses: `${prefix}/services/app/Attendance/SearchMyAttendanceRecordsAsync`,
-    studentList: `${prefix}/services/app/Course/GetSubscribeAsync`,
-    updateAttendance: `${prefix}/services/app/Attendance/CreateOrUpdateAttendanceRecordAsync`
-  }
-  wx.setStorageSync('API', API);
-}
+// const updateApi = (server) => {
+//   const prefix = server + '/api';
+//   const API = {
+//     login: `${prefix}/TokenAuth/Authenticate`,
+//     userInfo: `${prefix}/services/app/User/GetInfoAsync`,
+//     courses: `${prefix}/services/app/Attendance/SearchMyAttendanceRecordsAsync`,
+//     studentList: `${prefix}/services/app/Course/GetSubscribeAsync`,
+//     updateAttendance: `${prefix}/services/app/Attendance/CreateOrUpdateAttendanceRecordAsync`
+//   }
+//   wx.setStorageSync('API', API);
+// }
 /**
  * 获取网关值
  */
