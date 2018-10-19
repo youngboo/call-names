@@ -47,17 +47,13 @@ Page({
     }
     return str;
   },
-  handleFocus: function (e) {
-    const {id} = e.target;
-    this.setData({
-      focus: id
-    })
-    console.log(id);
-  },
   handleInput: function (e) {
     return this.validateRequire(e);
   },
   handleBlur: function (e) {
+    this.setData({
+      focus: ''
+    })
     this.validateRequire(e);
   },
   nextInput: function (e) {

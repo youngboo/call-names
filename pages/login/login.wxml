@@ -21,7 +21,6 @@
             <input 
               class='form-input' 
               confirm-type='next' 
-              bindfocus='handleFocus'
               bindblur='validateRequire' 
               bindinput='validateRequire' 
               id='school' 
@@ -43,7 +42,6 @@
             <input
               class='form-input' 
               confirm-type='next' 
-              bindfocus='handleFocus'
               bindblur='handleBlur' 
               bindinput='handleInput' 
               id='user' 
@@ -52,9 +50,6 @@
               placeholder="请输入账号"
               bindconfirm='nextInput'
               focus='{{focus==="user" ? true: false}}'
-              selection-start="{{ cursorIndex }}"
-              selection-end="{{ cursorIndex }}" 
-              cursor="{{ cursorIndex }}"
             />
             <view class='icon-box'>
               <icon type='warn' color='#E64340' size='23' wx:if='{{userRequire}}'></icon>
@@ -69,7 +64,7 @@
               confirm-type='done'
               cursor-spacing='60'
               bindblur='validateRequire' 
-              bindinput='validateRequire' 
+              bindinput='validateRequire'
               id='password' 
               name="password" 
               type='text' 
