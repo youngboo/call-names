@@ -145,6 +145,7 @@ Page({
       id: detail.id
     })
       .then((result) => {
+        wx.hideLoading();
         if (result.totalCount > 0) {
           let list = result.items.map((item) => {
             return {
@@ -196,7 +197,6 @@ Page({
             icon: 'none'
           });
         }
-        wx.hideLoading();
       })
       .catch(rej => wx.hideLoading());
   },
@@ -305,7 +305,11 @@ Page({
             name: item.name,
             content: this.getScheduleText(item.courseSchedules),
             state: this.getAttendState(attend),
-            attend: attend
+            attend: attend ? {
+              ...attend,
+              creationTime: patternDate(new Date(attend.creationTime), 'yyyy-MM-dd HH:mm:ss')
+            }: null
+            
           }
         })
       }

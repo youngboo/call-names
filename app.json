@@ -9,6 +9,6 @@
     "navigationBarBackgroundColor": "#7DA6DF",
     "navigationBarTextStyle": "white",
     "enablePullDownRefresh": false,
-    "onReachBottomDistance": false
+    "onReachBottomDistance": 0
   }
 }

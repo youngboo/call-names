@@ -267,6 +267,7 @@ const request = (options) => {
         resolve(res);
       },
       fail: () => {
+        wx.hideLoading();
         if (options.fail) {
           options.fail();
         }
@@ -275,7 +276,6 @@ const request = (options) => {
             title: options.errorMsg,
           })
         }
-        wx.hideLoading();
         reject('网络错误');
       },
       complete: () => {
